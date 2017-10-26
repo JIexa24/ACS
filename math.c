@@ -1,43 +1,38 @@
 #include <stdio.h>
 #include <math.h>
 
-volatile double msqrt(double value)
+volatile double mpow(int num, int radix)
 {
-    double res;
-    unsigned int a = 0x4000;
-    a = a >> 2;
-	asm volatile (
-
-                  "mov r1, %1\n\t"
-                  "mov r2, %2\n\t"
-                  "mov r3, #0\n\t"
-                  "b loopif%=\n\t"
-
-                  "loop%=:\n\t"
-                  "orr r4, r3, r2\n\t"
-                  "lsrs r3, r3, #1\n\t"
-                  "cmp r1, r4\n\t"
-                  "blt endloop%=\n\t"
-                  "sub r1, r1, r4\n\t"
-                  "orr r3, r3, r2\n\t"
-                  "endloop%=:\n\t"
-                  "lsrs r2, r2, #2\n\t"
-                  "loopif%=:\n\t"
-                  "cmp r5, #0\n\t"
-                  "bne loop%=\n\t"
-
-                  "end%=:\n\t"
-                  "mov %0, r1\n\t"
-                  : "=r" (res)
-                  : "r" (value), "r" (a)
-                  : "memory", "r1", "r2", "r3", "r4", "r5"
-	              );
+  int ret = -1;
+  asm volatile (
+  /*AT&T syntax*/
+	        "mov r0, #1\n\t"
+//                "movl $1, %%eax\n\t"
+	        "mov r1, %1\n\t"
+	        "mov r2, %2\n\t"
+	        "cmp $0, r2\n\t"
+                "bl lowpow%=\n\t"
+                "beq endpow%=\n"
+              "begpow%=:\n\t"
+                "cmpl $0, r2\n\t"
+                "beq endpow%=\n\t"
+                "mul r0, r0, r1\n\t"
+                "sub r2, r2, #1\n\t"
+                "b begpow%=\n"
+              "lowpow%=:\n\t"
+                "mov r0, #0\n"
+              "endpow%=:\n\t"
+                "mov %0, r0\n"
+                : "=r" (ret)
+                : "r" (num), "r" (radix)
+                : "memory"
+               );
     return res;
 }
 
 int main(){
 
-	printf("\n%lf\n%lf\n", msqrt(258), sqrt(258));
+	printf("\n%lf\n%lf\n", mpow(2, 4), pow(2, 4));
 
 	return 0;
 }
