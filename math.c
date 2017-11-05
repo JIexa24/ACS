@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-volatile double mpow(int num, int radix)
+volatile int mpow(int num, int radix)
 {
   int ret = -1;
   asm volatile (
@@ -32,7 +32,7 @@ volatile double mpow(int num, int radix)
 
 int main(){
 
-	printf("\n%lf\n%lf\n", mpow(2, 4), pow(2, 4));
+	printf("\n%d\n%d\n", mpow(2, 4), pow(2, 4));
 
 	return 0;
 }
