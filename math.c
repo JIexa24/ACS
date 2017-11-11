@@ -2,7 +2,10 @@
 #include <math.h>
 #include <sys/time.h>
 
-#define asmPow(num,radix) asm volatile (\
+#define asmPow(num, radix) _Generic((num), default: asmPowlf, int: asmPowi, float: asmPowf)(num, radix)
+#define asmpow(num, radix) _Generic((num), default: asmpowlf, int: asmpowi, float: asmpowf)(num, radix)
+
+#define asmPowi(num,radix) asm volatile (\
 	        "mov r0, #1\n\t"\
 	        "mov r1, %1\n\t"\
 	        "mov r2, %2\n\t"\
@@ -25,6 +28,53 @@
                 : "memory" \
                );
 
+#define asmPowlf(num,radix) asm volatile (\
+               // "arsm | fmuls\fmuld"\
+	        "vmov d0, #1\n\t"\
+	        "vmov d1, %1\n\t"\
+	        "vmov d2, %2\n\t"\
+	        "vmov d4, #0\n\t"\
+	        "cmp d2, d4\n\t"\
+                "blo lowpow%=\n\t"\
+                "beq endpow%=\n"\
+              "begpow%=:\n\t"\
+                "cmp d2, d4\n\t"\
+                "beq endpow%=\n\t"\
+                "fmuld d0, d0, d1\n\t"\
+                "sub d2, d2, #1\n\t"\
+                "b begpow%=\n"\
+              "lowpow%=:\n\t"\
+                "mov d0, #0\n"\
+              "endpow%=:\n\t"\
+                "mov %0, d0\n"\
+                : "=r" (ret)\
+                : "r" (num), "r" (radix)\
+                : "memory"\
+               );
+#define asmPowf(num,radix) asm volatile (\
+               // "arsm | fmuls\fmuld"\
+	        "vmov s0, #1\n\t"\
+	        "vmov s1, %1\n\t"\
+	        "vmov s2, %2\n\t"\
+	        "vmov s4, #0\n\t"\
+	        "cmp s2, s4\n\t"\
+                "blo lowpow%=\n\t"\
+                "beq endpow%=\n"\
+              "begpow%=:\n\t"\
+                "cmp s2, s4\n\t"\
+                "beq endpow%=\n\t"\
+                "fmuls s0, s0, s1\n\t"\
+                "sub s2, s2, #1\n\t"\
+                "b begpow%=\n"\
+              "lowpow%=:\n\t"\
+                "mov s0, #0\n"\
+              "endpow%=:\n\t"\
+                "mov %0, s0\n"\
+                : "=r" (ret)\
+                : "r" (num), "r" (radix)\
+                : "memory"\
+               );
+
 double wtime()
 {
     struct timeval t;
@@ -32,7 +82,7 @@ double wtime()
     return (double)t.tv_sec + (double)t.tv_usec * 1E-6;
 }
 
-volatile int asmpow(int num, int radix)
+volatile int asmpowi(int num, int radix)
 {
   int ret = -1;
   asm volatile (
@@ -61,6 +111,63 @@ volatile int asmpow(int num, int radix)
     return ret;
 }
 
+volatile double asmpowlf(double num, int radix)
+{
+  int ret = -1;
+  asm volatile (
+               // "arsm | fmuls\fmuld"
+	        "vmov d0, #1\n\t"
+	        "vmov d1, %1\n\t"
+	        "vmov d2, %2\n\t"
+	        "vmov d4, #0\n\t"
+	        "cmp d2, d4\n\t"
+                "blo lowpow%=\n\t"
+                "beq endpow%=\n"
+              "begpow%=:\n\t"
+                "cmp d2, d4\n\t"
+                "beq endpow%=\n\t"
+                "fmuld d0, d0, d1\n\t"
+                "sub d2, d2, #1\n\t"
+                "b begpow%=\n"
+              "lowpow%=:\n\t"
+                "mov d0, #0\n"
+              "endpow%=:\n\t"
+                "mov %0, d0\n"
+                : "=r" (ret)
+                : "r" (num), "r" (radix)
+                : "memory"
+               );
+    return ret;
+}
+
+volatile float asmpowf(float num, int radix)
+{
+  int ret = -1;
+  asm volatile (
+               // "arsm | fmuls\fmuld"
+	        "vmov s0, #1\n\t"
+	        "vmov s1, %1\n\t"
+	        "vmov s2, %2\n\t"
+	        "vmov s4, #0\n\t"
+	        "cmp s2, s4\n\t"
+                "blo lowpow%=\n\t"
+                "beq endpow%=\n"
+              "begpow%=:\n\t"
+                "cmp s2, s4\n\t"
+                "beq endpow%=\n\t"
+                "fmuls s0, s0, s1\n\t"
+                "sub s2, s2, #1\n\t"
+                "b begpow%=\n"
+              "lowpow%=:\n\t"
+                "mov s0, #0\n"
+              "endpow%=:\n\t"
+                "mov %0, s0\n"
+                : "=r" (ret)
+                : "r" (num), "r" (radix)
+                : "memory"
+               );
+    return ret;
+}
 int main(){
 
 int b = 4;
