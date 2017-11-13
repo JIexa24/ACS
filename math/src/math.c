@@ -167,9 +167,9 @@ volatile float asmpowf(float num, int radix)
 }
 
 #define asmPow(X, Y) _Generic((X), default: asmPowlf, double: asmPowlf, int: asmPowi, \
-                              float: asmPowf)(X, Y)
+                              float: asmPowf)
 #define asmpow(X, Y) _Generic((x), default: asmpowlf, double: asmpowlf, int: asmpowi, \
-                              float: asmpowf)(X, Y)
+                              float: asmpowf)
 
 int main(){
 
