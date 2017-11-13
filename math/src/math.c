@@ -44,7 +44,7 @@
                 "mov d0, #0\n"\
               "endpow%=:\n\t"\
                 "mov %0, d0\n"\
-                : "=r" (ret)\
+                : "=r" (num)\
                 : "r" (num), "r" (radix)\
                 : "memory"\
                );
@@ -67,7 +67,7 @@
                 "mov s0, #0\n"\
               "endpow%=:\n\t"\
                 "mov %0, s0\n"\
-                : "=r" (ret)\
+                : "=r" (num)\
                 : "r" (num), "r" (radix)\
                 : "memory"\
                );
