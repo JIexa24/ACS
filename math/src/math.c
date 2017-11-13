@@ -2,11 +2,6 @@
 #include <math.h>
 #include <sys/time.h>
 
-#define asmPow(x, y) _Generic((x), default: asmPowlf, int: asmPowi, \
-                              float: asmPowf)(x, y)
-#define asmpow(x, y) _Generic((x), default: asmpowlf, int: asmpowi, \
-                              float: asmpowf)(x, y)
-
 #define asmPowi(num,radix) asm volatile (\
 	        "mov r0, #1\n\t"\
 	        "mov r1, %1\n\t"\
@@ -170,6 +165,12 @@ volatile float asmpowf(float num, int radix)
                );
     return ret;
 }
+
+#define asmPow(x, y) _Generic((x), default: asmPowlf, int: asmPowi, \
+                              float: asmPowf)(x, y)
+#define asmpow(x, y) _Generic((x), default: asmpowlf, int: asmpowi, \
+                              float: asmpowf)(x, y)
+
 int main(){
 
 int b = 4;
