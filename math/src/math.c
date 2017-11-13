@@ -2,8 +2,7 @@
 #include <math.h>
 #include <sys/time.h>
 
-#define asmPow(x, y) _Generic(x), default: asmPowlf, int: asmPowi, float: asmPowf)(x, y)
-
+#define asmPow(x, y) _Generic((x), default: asmPowlf, int: asmPowi, float: asmPowf)(x, y)
 #define asmpow(x, y) _Generic((x), default: asmpowlf, int: asmpowi, float: asmpowf)(x, y)
 
 #define asmPowi(num,radix) asm volatile (\
