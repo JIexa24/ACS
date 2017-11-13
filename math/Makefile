@@ -1,4 +1,4 @@
-CC = mpicc
+CC = gcc
 CFLAGS = -g3 -O0 -lm
 
 all: MATH
