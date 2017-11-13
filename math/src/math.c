@@ -25,7 +25,7 @@
                 : "memory" \
                );
 
-               /* "arsm | fmuls\fmuld"\*/
+               /* "arsm | fmuls\fmuld"*/
 #define asmPowlf(num,radix) asm volatile (\
 	        "vmov d0, #1\n\t"\
 	        "vmov d1, %1\n\t"\
@@ -48,7 +48,7 @@
                 : "r" (num), "r" (radix)\
                 : "memory"\
                );
-               // "arsm | fmuls\fmuld"\
+               /*"arsm | fmuls\fmuld"*/
 #define asmPowf(num,radix) asm volatile (\
 	        "vmov s0, #1\n\t"\
 	        "vmov s1, %1\n\t"\
