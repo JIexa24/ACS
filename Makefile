@@ -1,5 +1,5 @@
 
-all: MATH MATRIX 
+all: MATRIX 
  
 MATRIX:
 	make -C matrix
