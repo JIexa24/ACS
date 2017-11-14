@@ -166,21 +166,21 @@ volatile float asmpowf(float num, int radix)
     return ret;
 }
 
-#define asmPow(X, Y) _Generic((X), default: asmPowlf, double: asmPowlf, int: asmPowi, \
-                              float: asmPowf)
-#define asmpow(X, Y) _Generic((X), default: asmpowlf, double: asmpowlf, int: asmpowi, \
-                              float: asmpowf)
+//#define asmPow(X, Y) _Generic((X), default: asmPowlf, double: asmPowlf, int: asmPowi, \
+ //                             float: asmPowf)
+//#define asmpow(X, Y) _Generic((X), default: asmpowlf, double: asmpowlf, int: asmpowi, \
+ //                             float: asmpowf)
 
 int main(){
 
 int b = 4;
 
         double t = wtime();
-        int a = asmpow(4,10);
+        int a = asmpowi(4,10);
         t = wtime() - t;
 
         double t1 = wtime();
-        asmPow(b,10);
+        asmPowi(b,10);
         t1 = wtime() - t1;
 
         double t2 = wtime();
