@@ -161,7 +161,7 @@ int main(int argc, char** argv)
   printf("%d\n",threadn);
   while(threadn > 0);
   printf("%d\n",threadn);
-  sleep(2);
+//  sleep(2);
   int flg = argc > 3 ? atoi(argv[3]) : 0;
 
   if (flg > 0){
