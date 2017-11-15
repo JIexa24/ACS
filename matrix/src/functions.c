@@ -283,9 +283,6 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_unlock(&levelmutex);
     islevelblocked = 0;
     }
-    pthread_mutex_lock(&incmutex);
-    levelt++;
-    pthread_mutex_unlock(&incmutex);
     
     // C22 += A22 * B22
     simpleMatrixProizvCacheObliviousp(&argum[7]);
