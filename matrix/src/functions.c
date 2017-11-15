@@ -122,6 +122,7 @@ void simpleMatrixProizvCacheOblivious(int32_t *C,  int32_t *A,  int32_t *B,
 void * simpleMatrixProizvCacheObliviousp(void* ptr)
 {
   dat * p = (dat *)(ptr);
+  printf("currentlevel = %d!\n",  p->cursorlevel);
   //  printf("%d\n", p->size); 
   
   if (p->size == 2)
