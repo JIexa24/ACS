@@ -1,6 +1,6 @@
 #include "../include/functions.h"
 #include <pthread.h>
-#define TRESHOLD 512
+#define TRESHOLD 511
 extern int threadnum;
 extern int threadn;
 
