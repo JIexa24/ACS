@@ -149,7 +149,7 @@ int main(int argc, char** argv)
 //  simpleMatrixProizvCacheOblivious(rezult, one, two, realSize, realSize);
   time = wtime() - time;
   
-  while(threadn > 0);
+  while(threadn >= 0);
   
   int flg = argc > 3 ? atoi(argv[3]) : 0;
 
