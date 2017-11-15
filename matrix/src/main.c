@@ -148,8 +148,9 @@ int main(int argc, char** argv)
    simpleMatrixProizvCacheObliviousp(&datat);
 //  simpleMatrixProizvCacheOblivious(rezult, one, two, realSize, realSize);
   time = wtime() - time;
-  
+  printf("%d\n",threadn);
   while(threadn >= 0);
+  printf("%d\n",threadn);
   
   int flg = argc > 3 ? atoi(argv[3]) : 0;
 
