@@ -173,8 +173,9 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     islevelblocked = 0;
     pthread_mutex_unlock(&levelmutex);
     }
-    } else
-    simpleMatrixProizvCacheObliviousp(&argum[0]);
+    } else{
+    if (threadnblocked == 1) { threadnblocked = 0;pthread_mutex_unlock(&incmutex); }
+    simpleMatrixProizvCacheObliviousp(&argum[0]);}
     
     // C11 += A12 * B21
     pthread_mutex_lock(&incmutex);threadnblocked = 1;
@@ -193,10 +194,13 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     islevelblocked = 0;
     pthread_mutex_unlock(&levelmutex);
     }
-    } else
-    simpleMatrixProizvCacheObliviousp(&argum[1]);
+    } else{
+      
     if (threadnblocked == 1) { threadnblocked = 0;pthread_mutex_unlock(&incmutex); }
+    simpleMatrixProizvCacheObliviousp(&argum[1]);
 
+    }
+      
     // C12 += A11 * B12
     pthread_mutex_lock(&incmutex);threadnblocked = 1;
     if (threadn < threadnum && threadn >= 0){
@@ -214,10 +218,13 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     islevelblocked = 0;
     pthread_mutex_unlock(&levelmutex);
     }
-    } else
-    simpleMatrixProizvCacheObliviousp(&argum[2]);
+    } else{
+      
     if (threadnblocked == 1) { threadnblocked = 0;pthread_mutex_unlock(&incmutex); }
-    
+    simpleMatrixProizvCacheObliviousp(&argum[2]);
+
+    }
+      
     // C12 += A12 * B22
     pthread_mutex_lock(&incmutex);threadnblocked = 1;
     if (threadn < threadnum && threadn >= 0){
@@ -235,10 +242,13 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     islevelblocked = 0;
     pthread_mutex_unlock(&levelmutex);
     }
-    } else
-    simpleMatrixProizvCacheObliviousp(&argum[3]);
+    } else{
+      
     if (threadnblocked == 1) { threadnblocked = 0;pthread_mutex_unlock(&incmutex); }
+    simpleMatrixProizvCacheObliviousp(&argum[3]);
 
+    }
+      
     // C21 += A21 * B11
     pthread_mutex_lock(&incmutex);threadnblocked = 1;
     if (threadn < threadnum && threadn >= 0){
@@ -256,10 +266,13 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     islevelblocked = 0;
     pthread_mutex_unlock(&levelmutex);
     }
-    } else
-    simpleMatrixProizvCacheObliviousp(&argum[4]);
+    } else{
+      
     if (threadnblocked == 1) { threadnblocked = 0;pthread_mutex_unlock(&incmutex); }
-    
+    simpleMatrixProizvCacheObliviousp(&argum[4]);
+
+    }
+      
     // C21 += A22 * B21
     pthread_mutex_lock(&incmutex);threadnblocked = 1;
     if (threadn < threadnum && threadn >= 0){
@@ -277,10 +290,13 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     islevelblocked = 0;
     pthread_mutex_unlock(&levelmutex);
     }
-    } else
-    simpleMatrixProizvCacheObliviousp(&argum[5]);
+    } else{
+      
     if (threadnblocked == 1) { threadnblocked = 0;pthread_mutex_unlock(&incmutex); }
+    simpleMatrixProizvCacheObliviousp(&argum[5]);
 
+    }
+      
     // C22 += A21 * B12
     pthread_mutex_lock(&incmutex);threadnblocked = 1;
     if (threadn < threadnum && threadn >= 0){
@@ -298,10 +314,13 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     islevelblocked = 0;
     pthread_mutex_unlock(&levelmutex);
     }
-    } else
-    simpleMatrixProizvCacheObliviousp(&argum[6]);
+    } else{
+      
     if (threadnblocked == 1) { threadnblocked = 0;pthread_mutex_unlock(&incmutex); }
-    
+    simpleMatrixProizvCacheObliviousp(&argum[6]);
+
+    }
+      
     if (islevelblocked == 1) {
     printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
