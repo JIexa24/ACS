@@ -119,7 +119,8 @@ void simpleMatrixProizvCacheOblivious(int32_t *C,  int32_t *A,  int32_t *B,
 void * simpleMatrixProizvCacheObliviousp(void* ptr)
 {
   dat * p = (dat *)(ptr);
-//  printf("%d\n", p->size); 
+  int islevelblocked = 0;
+  //  printf("%d\n", p->size); 
   level=levelt;
   if (p->size == 2)
   {
@@ -150,9 +151,9 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
 {p->C + ind22, p->A + ind22, p->B + ind22, tsize, p->rowsize}
 };
 
-    if (threadn < threadnum && threadn >= 0){
+    if (threadn < threadnum && threadn >= 0 && islevelblocked == 0){
     pthread_mutex_lock(&levelmutex);
-    printf("levelblocked\n");
+    printf("levelblocked\n");islevelblocked = 1;
     }
     // C11 += A11 * B11
     if (threadn < threadnum && threadn >= 0){
@@ -161,7 +162,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
-    if (threadn >= threadnum) {
+    if (threadn >= threadnum && islevelblocked == 1;) {
     printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     }
@@ -170,14 +171,15 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     
     // C11 += A12 * B21
     if (threadn < threadnum && threadn >= 0){
+    if ( islevelblocked == 0) { 
     pthread_mutex_lock(&levelmutex);
-    printf("levelblocked\n");
+    printf("levelblocked\n");islevelblocked = 1;}
     pthread_create(&tid[1],NULL,simpleMatrixProizvCacheObliviousp, &argum[1]);
       printf("thread %d %d!\n",threadn,threadnum);
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
-    if (threadn >= threadnum) {
+    if (threadn >= threadnum && islevelblocked == 1;) {
     printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     }
@@ -186,14 +188,15 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
 
     // C12 += A11 * B12
     if (threadn < threadnum && threadn >= 0){
+    if ( islevelblocked == 0) { 
     pthread_mutex_lock(&levelmutex);
-    printf("levelblocked\n");
+    printf("levelblocked\n");islevelblocked = 1;}
     pthread_create(&tid[2],NULL,simpleMatrixProizvCacheObliviousp, &argum[2]);
       printf("thread %d %d!\n",threadn,threadnum);
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
-    if (threadn >= threadnum) {
+    if (threadn >= threadnum && islevelblocked == 1;) {
     printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     }
@@ -202,14 +205,15 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     
     // C12 += A12 * B22
     if (threadn < threadnum && threadn >= 0){
+    if ( islevelblocked == 0) { 
     pthread_mutex_lock(&levelmutex);
-    printf("levelblocked\n");
+    printf("levelblocked\n");islevelblocked = 1;}
     pthread_create(&tid[3],NULL,simpleMatrixProizvCacheObliviousp, &argum[3]);
       printf("thread %d %d!\n",threadn,threadnum);
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
-    if (threadn >= threadnum) {
+    if (threadn >= threadnum && islevelblocked == 1;) {
     printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     }
@@ -218,14 +222,15 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
 
     // C21 += A21 * B11
     if (threadn < threadnum && threadn >= 0){
+    if ( islevelblocked == 0) { 
     pthread_mutex_lock(&levelmutex);
-    printf("levelblocked\n");
+    printf("levelblocked\n");islevelblocked = 1;}
     pthread_create(&tid[4],NULL,simpleMatrixProizvCacheObliviousp, &argum[4]);
       printf("thread %d %d!\n",threadn,threadnum);
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
-    if (threadn >= threadnum) {
+    if (threadn >= threadnum && islevelblocked == 1;) {
     printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     }
@@ -234,14 +239,15 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     
     // C21 += A22 * B21
     if (threadn < threadnum && threadn >= 0){
+    if ( islevelblocked == 0) { 
     pthread_mutex_lock(&levelmutex);
-    printf("levelblocked\n");
+    printf("levelblocked\n");islevelblocked = 1;}
     pthread_create(&tid[5],NULL,simpleMatrixProizvCacheObliviousp, &argum[5]);
       printf("thread %d %d!\n",threadn,threadnum);
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
-    if (threadn >= threadnum) {
+    if (threadn >= threadnum && islevelblocked == 1;) {
     printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     }
@@ -250,21 +256,22 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
 
     // C22 += A21 * B12
     if (threadn < threadnum && threadn >= 0){
+    if ( islevelblocked == 0) { 
     pthread_mutex_lock(&levelmutex);
-    printf("levelblocked\n");
+    printf("levelblocked\n");islevelblocked = 1;}
     pthread_create(&tid[6],NULL,simpleMatrixProizvCacheObliviousp, &argum[6]);
       printf("thread %d %d!\n",threadn,threadnum);
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
-    if (threadn >= threadnum) {
+    if (threadn >= threadnum && islevelblocked == 1;) {
     printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     }
     } else
     simpleMatrixProizvCacheObliviousp(&argum[6]);
     
-    
+    if (islevelblocked == 1)
     printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     
