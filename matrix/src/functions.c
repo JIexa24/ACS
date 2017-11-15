@@ -162,7 +162,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     threadn++;
     pthread_mutex_unlock(&incmutex);
     if (threadn >= threadnum) {
-    printf("levelunblocked\n")
+    printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     }
     } else
@@ -176,7 +176,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     threadn++;
     pthread_mutex_unlock(&incmutex);
     if (threadn >= threadnum) {
-    printf("levelunblocked\n")
+    printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     }
     } else
@@ -190,7 +190,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     threadn++;
     pthread_mutex_unlock(&incmutex);
     if (threadn >= threadnum) {
-    printf("levelunblocked\n")
+    printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     }
     } else
@@ -204,7 +204,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     threadn++;
     pthread_mutex_unlock(&incmutex);
     if (threadn >= threadnum) {
-    printf("levelunblocked\n")
+    printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     }
     } else
@@ -218,7 +218,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     threadn++;
     pthread_mutex_unlock(&incmutex);
     if (threadn >= threadnum) {
-    printf("levelunblocked\n")
+    printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     }
     } else
@@ -232,7 +232,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     threadn++;
     pthread_mutex_unlock(&incmutex);
     if (threadn >= threadnum) {
-    printf("levelunblocked\n")
+    printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     }
     } else
@@ -246,14 +246,14 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     threadn++;
     pthread_mutex_unlock(&incmutex);
     if (threadn >= threadnum) {
-    printf("levelunblocked\n")
+    printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     }
     } else
     simpleMatrixProizvCacheObliviousp(&argum[6]);
     
     
-    printf("levelunblocked\n")
+    printf("levelunblocked\n");
     pthread_mutex_unlock(&levelmutex);
     
     pthread_mutex_lock(&incmutex);
