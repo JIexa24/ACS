@@ -16,6 +16,7 @@ typedef struct threaddata {
   int rowsize;
   int cursorlevel;
   int needlevel;
+  int isthread;
 } dat;
 
 double wtime();
