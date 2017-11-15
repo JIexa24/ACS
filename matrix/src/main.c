@@ -129,7 +129,7 @@ int main(int argc, char** argv)
   }
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      printf("%d\t", one[i * size + j]);
+      printf("%d(%d %d|%d %d)\t", one[i * size + j], i , j, size, realSize);
     }
       printf("\n");
   }
