@@ -1,6 +1,7 @@
 #include "../include/functions.h"
 int threadnum = 7;
 int threadn;
+int print;
 int getrand(int32_t min, int32_t max)
 {
   return (double)rand() / (RAND_MAX + 1.0) * (max - min) + min;
@@ -169,8 +170,8 @@ int main(int argc, char** argv)
   printf("%d\n",threadn);
 //  sleep(2);
   int flg = argc > 3 ? atoi(argv[3]) : 0;
-
-  if (flg > 0){
+  print = flg;
+  if (flg > 1){
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
       printf("%d\t", one[i * size + j]);
