@@ -138,20 +138,20 @@ int main(int argc, char** argv)
   
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      printf("%d \n", one[i * size + j]);
+      printf("%d ", one[i * size + j]);
     }
       printf("\n");
   }
   
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      printf("%d \n", two[i * size + j]);
+      printf("%d ", two[i * size + j]);
     }
       printf("\n");
   }
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      printf("%d \n", rezult[i * size + j]);
+      printf("%d ", rezult[i * size + j]);
     }
       printf("\n");
   }
