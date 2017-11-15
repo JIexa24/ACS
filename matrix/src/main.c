@@ -153,7 +153,7 @@ int main(int argc, char** argv)
       printf("\n");
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      printf("%d ", rezult[i * size + j]);
+      printf("%d\t", rezult[i * size + j]);
     }
       printf("\n");
   }
