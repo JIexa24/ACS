@@ -156,8 +156,6 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     }
     // C11 += A11 * B11
     if (threadn < threadnum && threadn >= 0){
-    pthread_mutex_lock(&levelmutex);
-    printf("levelblocked\n");
     pthread_create(&tid[0],NULL,simpleMatrixProizvCacheObliviousp, &argum[0]);
       printf("thread %d %d!\n",threadn,threadnum);
     pthread_mutex_lock(&incmutex);
