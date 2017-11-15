@@ -186,7 +186,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
       simpleMatrixProizvCacheObliviousp(&argum[6]);
     }
     if (mutlock == 1)
-    pthread_mutex_unlock(&inclmutex);
+    pthread_mutex_unlock(&incmutex);
     
     } else {
     // C22 += A21 * B12
