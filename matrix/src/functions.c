@@ -316,7 +316,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
       pthread_mutex_unlock(&incmutex);
   }
   if (p->cursorlevel == 1){
-    while (threadn > 0);
+    while (threadn > 0){ printf("do nothing"); sleep(2);}
   }
   return NULL;
 }
