@@ -2,9 +2,10 @@
 #include <pthread.h>
 extern int threadnum;
 extern int threadn;
-  int islevelblocked = 0;
 
-int threadnblocked = 0;
+int islevelblocked = 0;
+int mutlock = 0;
+
 pthread_mutex_t incmutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t decmutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t levelmutex = PTHREAD_MUTEX_INITIALIZER;
@@ -143,14 +144,14 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     const int ind22 = tsize * (p->rowsize + 1);
     pthread_t tid[8];
     dat argum[8] = {
-{p->C + ind11, p->A + ind11, p->B + ind11, tsize, p->rowsize},//
-{p->C + ind11, p->A + ind12, p->B + ind21, tsize, p->rowsize},//
-{p->C + ind12, p->A + ind11, p->B + ind12, tsize, p->rowsize},//
-{p->C + ind12, p->A + ind12, p->B + ind22, tsize, p->rowsize},//
-{p->C + ind21, p->A + ind21, p->B + ind11, tsize, p->rowsize},//
-{p->C + ind21, p->A + ind22, p->B + ind21, tsize, p->rowsize},
-{p->C + ind22, p->A + ind21, p->B + ind12, tsize, p->rowsize},
-{p->C + ind22, p->A + ind22, p->B + ind22, tsize, p->rowsize}
+{p->C + ind11, p->A + ind11, p->B + ind11, tsize, p->rowsize, p->cursorlevel + 1, p->needlevel},//
+{p->C + ind11, p->A + ind12, p->B + ind21, tsize, p->rowsize, p->cursorlevel + 1, p->needlevel},//
+{p->C + ind12, p->A + ind11, p->B + ind12, tsize, p->rowsize, p->cursorlevel + 1, p->needlevel},//
+{p->C + ind12, p->A + ind12, p->B + ind22, tsize, p->rowsize, p->cursorlevel + 1, p->needlevel},//
+{p->C + ind21, p->A + ind21, p->B + ind11, tsize, p->rowsize, p->cursorlevel + 1, p->needlevel},//
+{p->C + ind21, p->A + ind22, p->B + ind21, tsize, p->rowsize, p->cursorlevel + 1, p->needlevel},
+{p->C + ind22, p->A + ind21, p->B + ind12, tsize, p->rowsize, p->cursorlevel + 1, p->needlevel},
+{p->C + ind22, p->A + ind22, p->B + ind22, tsize, p->rowsize, p->cursorlevel + 1, p->needlevel}
 };
 
     // C11 += A11 * B11
@@ -172,10 +173,24 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     
     // C21 += A22 * B21
     simpleMatrixProizvCacheObliviousp(&argum[5]);
+    
+    if (threadnum > 0){
       
- //   pthread_create(&tid[6],NULL,simpleMatrixProizvCacheObliviousp, &argum[6]);
+    pthread_mutex_lock(&inclmutex);mutlock = 1
+    if (threadn <= threadnum && p->needlevel == p->cursorlevel) {
+    threadn++;
+      printf("thread %d is %d!\n", threadn - 1, threadnum);
+    pthread_create(&tid[6],NULL,simpleMatrixProizvCacheObliviousp, &argum[6]);
+    } else {
+      pthread_mutex_unlock(&inclmutex);
+      simpleMatrixProizvCacheObliviousp(&argum[6]);
+    }
+    if (mutlock == 1)
+    pthread_mutex_unlock(&inclmutex);
+    
+    } else {
     // C22 += A21 * B12
-    simpleMatrixProizvCacheObliviousp(&argum[6]);
+    simpleMatrixProizvCacheObliviousp(&argum[6]);}
 
     // C22 += A22 * B22
     simpleMatrixProizvCacheObliviousp(&argum[7]);
