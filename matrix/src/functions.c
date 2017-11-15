@@ -179,7 +179,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn <= threadnum && p->needlevel == p->cursorlevel) {
     threadn++;
-      printf("thread %d is %d!\n", threadn - 1, threadnum);
+      printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
     pthread_create(&tid[6],NULL,simpleMatrixProizvCacheObliviousp, &argum[6]);
     } else {
       pthread_mutex_unlock(&incmutex);
