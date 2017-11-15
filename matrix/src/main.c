@@ -104,7 +104,7 @@ int main(int argc, char** argv)
 
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      if ((i >= size) | (j >= size)) {
+      if ((i >= size) & (j >= size)) {
         one[i * size + j] = 0;
       } else {
         one[i * size + j] = getrand(min,max);
@@ -114,7 +114,7 @@ int main(int argc, char** argv)
 
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      if ((i >= size) | (j >= size)) {
+      if ((i >= size) & (j >= size)) {
         two[i * size + j] = 0;
       } else {
         two[i * size + j] = getrand(min,max);
