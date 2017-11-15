@@ -104,7 +104,7 @@ int main(int argc, char** argv)
 
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      if ((i >= size) | (j >= size)) {
+      if ((i >= size) || (j >= size)) {
         one[i * size + j] = 0;
       } else {
         one[i * size + j] = getrand(min,max);
@@ -114,7 +114,7 @@ int main(int argc, char** argv)
 
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      if ((i >= size) | (j >= size)) {
+      if ((i >= size) || (j >= size)) {
         two[i * size + j] = 0;
       } else {
         two[i * size + j] = getrand(min,max);
@@ -127,6 +127,13 @@ int main(int argc, char** argv)
       rezult[i * size + j] = 0;
     }
   }
+  for (i = 0; i < realSize; i++) {
+    for (j = 0; j < realSize; j++) {
+      printf("%d\t", one[i * size + j]);
+    }
+      printf("\n");
+  }
+      printf("\n");
   threadnum = 0;
   threadn = 0;
   threadnum = argc > 2 ? atoi(argv[2]) : 4;
