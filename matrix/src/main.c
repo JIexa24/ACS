@@ -19,7 +19,7 @@ int main(int argc, char** argv)
   int32_t* two           = NULL;
   int32_t* rezult        = NULL;
   int size               = atoi(argv[1]);
-  int realSize           = size;
+  int realSize           = 1;
   int32_t min            = -5;
   int32_t max            = 5;
 
