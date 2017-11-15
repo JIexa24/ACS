@@ -19,7 +19,7 @@ int main(int argc, char** argv)
   int32_t* two           = NULL;
   int32_t* rezult        = NULL;
   int size               = atoi(argv[1]);
-  int realSize           = 1;
+  int realSize           = 2;
   int32_t min            = -5;
   int32_t max            = 5;
 
@@ -91,7 +91,7 @@ int main(int argc, char** argv)
   }
   free(matrixRezult);
 
-  for (i = -1; ; i++) {
+  for (i = 0; ; i++) {
     if ((size > myPow(2,i)) & (size <= myPow(2, i + 1))) {
       realSize = myPow(2, i + 1);
       break;
