@@ -123,7 +123,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
 {
   dat * p = (dat *)(ptr);
   //  printf("%d\n", p->size); 
-  level=levelt;
+  
   if (p->size == 2)
   {
     const int ind11 = 0;
@@ -176,13 +176,13 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     
     if (threadnum > 0){
       
-    pthread_mutex_lock(&inclmutex);mutlock = 1
+    pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn <= threadnum && p->needlevel == p->cursorlevel) {
     threadn++;
       printf("thread %d is %d!\n", threadn - 1, threadnum);
     pthread_create(&tid[6],NULL,simpleMatrixProizvCacheObliviousp, &argum[6]);
     } else {
-      pthread_mutex_unlock(&inclmutex);
+      pthread_mutex_unlock(&incmutex);
       simpleMatrixProizvCacheObliviousp(&argum[6]);
     }
     if (mutlock == 1)
