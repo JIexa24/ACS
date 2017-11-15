@@ -4,7 +4,7 @@
 extern int threadnum;
 extern int threadn;
 
-int islevelblocked = 0;
+extern int print = 0;
 int mutlock = 0;
 
 pthread_mutex_t incmutex = PTHREAD_MUTEX_INITIALIZER;
@@ -160,6 +160,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
     threadn++;
+      if(print) 
       printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
     pthread_create(&tid[0],NULL,simpleMatrixProizvCacheObliviousp, &argum[0]);
       argum[0].isthread = 1;
@@ -179,6 +180,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
     threadn++;
+      if(print) 
       printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
     pthread_create(&tid[1],NULL,simpleMatrixProizvCacheObliviousp, &argum[1]);
       argum[1].isthread = 1;
@@ -198,6 +200,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
     threadn++;
+      if(print) 
       printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
     pthread_create(&tid[2],NULL,simpleMatrixProizvCacheObliviousp, &argum[2]);
       argum[2].isthread = 1;
@@ -217,6 +220,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
     threadn++;
+      if(print) 
       printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
     pthread_create(&tid[3],NULL,simpleMatrixProizvCacheObliviousp, &argum[3]);
       argum[3].isthread = 1;
@@ -237,6 +241,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
     threadn++;
+      if(print) 
       printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
     pthread_create(&tid[4],NULL,simpleMatrixProizvCacheObliviousp, &argum[4]);
       argum[4].isthread = 1;
@@ -256,6 +261,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
     threadn++;
+      if(print) 
       printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
       argum[5].isthread = 1;
     pthread_create(&tid[5],NULL,simpleMatrixProizvCacheObliviousp, &argum[5]);
@@ -275,6 +281,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
     threadn++;
+      if(print) 
       printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
       argum[6].isthread = 1;
     pthread_create(&tid[6],NULL,simpleMatrixProizvCacheObliviousp, &argum[6]);
@@ -294,10 +301,12 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
     threadn++;
+      if(print) 
       printf("(7)thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
       argum[7].isthread = 1;
     pthread_create(&tid[7],NULL,simpleMatrixProizvCacheObliviousp, &argum[7]);
       pthread_join(tid[7], NULL);
+      if(print) 
       printf("(7)thread %d is %d join success! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
     } else {
       pthread_mutex_unlock(&incmutex);
@@ -315,10 +324,11 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);
     threadn--;
       pthread_mutex_unlock(&incmutex);
+      if(print) 
       printf("thread exit\n", threadn - 1, threadnum, p->cursorlevel);
   }
   if (p->cursorlevel == 1){
-    while (threadn > 0){ printf("do nothing"); sleep(2);}
+    while (threadn > 0){ printf("do nothing\n"); sleep(2);}
   }
   return NULL;
 }
