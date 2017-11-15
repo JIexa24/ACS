@@ -170,7 +170,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     if (mutlock == 1)
     pthread_mutex_unlock(&incmutex);
     
-    } else {
+    } else 
     simpleMatrixProizvCacheObliviousp(&argum[0]);
     
     // C11 += A12 * B21
@@ -188,7 +188,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     if (mutlock == 1)
     pthread_mutex_unlock(&incmutex);
     
-    } else {
+    } else 
     simpleMatrixProizvCacheObliviousp(&argum[1]);
       
     // C12 += A11 * B12
@@ -206,7 +206,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     if (mutlock == 1)
     pthread_mutex_unlock(&incmutex);
     
-    } else {
+    } else 
     simpleMatrixProizvCacheObliviousp(&argum[2]);
       
     // C12 += A12 * B22
@@ -224,7 +224,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     if (mutlock == 1)
     pthread_mutex_unlock(&incmutex);
     
-    } else {
+    } else 
     simpleMatrixProizvCacheObliviousp(&argum[3]);
 
       
@@ -243,7 +243,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     if (mutlock == 1)
     pthread_mutex_unlock(&incmutex);
     
-    } else {
+    } else 
     simpleMatrixProizvCacheObliviousp(&argum[4]);
     
     // C21 += A22 * B21
@@ -261,7 +261,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     if (mutlock == 1)
     pthread_mutex_unlock(&incmutex);
     
-    } else {
+    } else 
     simpleMatrixProizvCacheObliviousp(&argum[5]);
     
     // C22 += A21 * B12
@@ -279,7 +279,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     if (mutlock == 1)
     pthread_mutex_unlock(&incmutex);
     
-    } else {
+    } else 
     simpleMatrixProizvCacheObliviousp(&argum[6]);
 
     // C22 += A22 * B22
@@ -297,7 +297,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     if (mutlock == 1)
     pthread_mutex_unlock(&incmutex);
     
-    } else {
+    } else 
     simpleMatrixProizvCacheObliviousp(&argum[7]);
  // }
 //  p->thr[0]--;
