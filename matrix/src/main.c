@@ -158,7 +158,7 @@ int main(int argc, char** argv)
     }
   }
   
-  printf("needlvl %d",needlevel);
+  printf("needlvl %d\n",needlevel);
   dat datat = {rezult,one, two,realSize,realSize, 0, needlevel};
   time = wtime();
    simpleMatrixProizvCacheObliviousp(&datat);
