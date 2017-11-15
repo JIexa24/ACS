@@ -145,11 +145,17 @@ int main(int argc, char** argv)
   threadn = 0;
   threadnum = argc > 2 ? atoi(argv[2]) -  1 : 0;
 
+  printf("%d\n",threadn);
+  printf("%d\n",threadnum);
   if (threadnum <= 7) needlevel = 1;
+  printf("%d\n",needlevel);
   for (i = 1; ; i++) {
     if (threadnum < (myPow(8,i + 1)) && threadnum >= (myPow(8,i))) {
      needlevel = i + 1;
       break;
+    }
+    if (threadnum == 0) {
+     needlevel = 0;break; 
     }
   }
   
