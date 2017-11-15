@@ -302,5 +302,10 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
  // }
 //  p->thr[0]--;
   }
+  if (p->cursorlevel == p->needlevel + 1) {
+    pthread_mutex_lock(&incmutex);
+    threadn--;
+      pthread_mutex_unlock(&incmutex);
+  }
   return NULL;
 }
