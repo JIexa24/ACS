@@ -158,7 +158,8 @@ int main(int argc, char** argv)
      needlevel = 0;break; 
     }
   }
-  
+  int flg = argc > 3 ? atoi(argv[3]) : 0;
+  print = flg;  
   printf("needlvl %d\n",needlevel);
   dat datat = {rezult,one, two,realSize,realSize, 1, needlevel, 0};
   time = wtime();
@@ -169,8 +170,8 @@ int main(int argc, char** argv)
   //while(threadn > 0);
   printf("%d\n",threadn);
 //  sleep(2);
-  int flg = argc > 3 ? atoi(argv[3]) : 0;
-  print = flg;
+//  int flg = argc > 3 ? atoi(argv[3]) : 0;
+  //print = flg;
   if (flg > 1){
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
