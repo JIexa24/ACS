@@ -143,7 +143,7 @@ int main(int argc, char** argv)
       printf("\n");
   threadnum = 0;
   threadn = 0;
-  threadnum = argc > 2 ? atoi(argv[2]) -  1 : 3;
+  threadnum = argc > 2 ? atoi(argv[2]) -  1 : 0;
 
   if (threadnum <= 7) needlevel = 1;
   for (i = 1; ; i++) {
