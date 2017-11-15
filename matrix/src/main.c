@@ -143,7 +143,8 @@ int main(int argc, char** argv)
   threadnum = 0;
   threadn = 0;
   threadnum = argc > 2 ? atoi(argv[2]) : 4;
-  dat datat = {rezult,one, two,realSize,realSize};
+   
+  dat datat = {rezult,one, two,realSize,realSize, 0, 0};
   time = wtime();
    simpleMatrixProizvCacheObliviousp(&datat);
 //  simpleMatrixProizvCacheOblivious(rezult, one, two, realSize, realSize);
@@ -175,7 +176,8 @@ int main(int argc, char** argv)
       printf("%d\t", rezult[i * size + j]);
     }
       printf("\n");
-  }}
+  }
+  }
       printf("\n");
   printf("simpleMatrixProizvCacheOblivious\t%.6lf \n" , time);
 
