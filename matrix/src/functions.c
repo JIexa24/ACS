@@ -154,70 +154,70 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     // C11 += A11 * B11
     if (threadn < threadnum && threadn >= 0){
     pthread_create(&tid[0],NULL,simpleMatrixProizvCacheObliviousp, &argum[0]);
+      printf("thread %d %d!\n",threadn,threadnum);
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
-      printf("thread %d %d!\n",threadn,threadnum);
     } else
     simpleMatrixProizvCacheObliviousp(&argum[0]);
     
     // C11 += A12 * B21
     if (threadn < threadnum && threadn >= 0){
     pthread_create(&tid[1],NULL,simpleMatrixProizvCacheObliviousp, &argum[1]);
+      printf("thread %d %d!\n",threadn,threadnum);
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
-      printf("thread %d %d!\n",threadn,threadnum);
     } else
     simpleMatrixProizvCacheObliviousp(&argum[1]);
 
     // C12 += A11 * B12
     if (threadn < threadnum && threadn >= 0){
     pthread_create(&tid[2],NULL,simpleMatrixProizvCacheObliviousp, &argum[2]);
+      printf("thread %d %d!\n",threadn,threadnum);
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
-      printf("thread %d %d!\n",threadn,threadnum);
     } else
     simpleMatrixProizvCacheObliviousp(&argum[2]);
     
     // C12 += A12 * B22
     if (threadn < threadnum && threadn >= 0){
     pthread_create(&tid[3],NULL,simpleMatrixProizvCacheObliviousp, &argum[3]);
+      printf("thread %d %d!\n",threadn,threadnum);
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
-      printf("thread %d %d!\n",threadn,threadnum);
     } else
     simpleMatrixProizvCacheObliviousp(&argum[3]);
 
     // C21 += A21 * B11
     if (threadn < threadnum && threadn >= 0){
     pthread_create(&tid[4],NULL,simpleMatrixProizvCacheObliviousp, &argum[4]);
+      printf("thread %d %d!\n",threadn,threadnum);
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
-      printf("thread %d %d!\n",threadn,threadnum);
     } else
     simpleMatrixProizvCacheObliviousp(&argum[4]);
     
     // C21 += A22 * B21
     if (threadn < threadnum && threadn >= 0){
     pthread_create(&tid[5],NULL,simpleMatrixProizvCacheObliviousp, &argum[5]);
+      printf("thread %d %d!\n",threadn,threadnum);
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
-      printf("thread %d %d!\n",threadn,threadnum);
     } else
     simpleMatrixProizvCacheObliviousp(&argum[5]);
 
     // C22 += A21 * B12
     if (threadn < threadnum && threadn >= 0){
     pthread_create(&tid[6],NULL,simpleMatrixProizvCacheObliviousp, &argum[6]);
+      printf("thread %d %d!\n",threadn,threadnum);
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
-      printf("thread %d %d!\n",threadn,threadnum);
     } else
     simpleMatrixProizvCacheObliviousp(&argum[6]);
     
