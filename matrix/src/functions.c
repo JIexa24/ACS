@@ -5,6 +5,7 @@ extern int threadn;
   int islevelblocked = 0;
 int level = 1;
 int levelt = 1;
+int threadnblocked = 0;
 pthread_mutex_t incmutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t decmutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t levelmutex = PTHREAD_MUTEX_INITIALIZER;
@@ -158,7 +159,10 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     printf("levelblocked\n");islevelblocked = 1;
     }
     // C11 += A11 * B11
-    if (threadn < threadnum && threadn >= 0){
+    
+    pthread_mutex_lock(&incmutex);threadnblocked = 1;
+    if (threadn < threadnum && threadn >= 0){ 
+    pthread_mutex_unlock(&incmutex);threadnblocked = 0;
     pthread_create(&tid[0],NULL,simpleMatrixProizvCacheObliviousp, &argum[0]);
       printf("thread %d %d!\n",threadn,threadnum);
     pthread_mutex_lock(&incmutex);
@@ -173,7 +177,9 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[0]);
     
     // C11 += A12 * B21
+    pthread_mutex_lock(&incmutex);threadnblocked = 1;
     if (threadn < threadnum && threadn >= 0){
+    threadnblocked = 0; pthread_mutex_unlock(&incmutex)
     if ( islevelblocked == 0) { 
     pthread_mutex_lock(&levelmutex);
     printf("levelblocked\n");islevelblocked = 1;}
@@ -189,9 +195,12 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     }
     } else
     simpleMatrixProizvCacheObliviousp(&argum[1]);
+    if (threadnblocked == 1) { threadnblocked = 0;pthread_mutex_unlock(&incmutex); }
 
     // C12 += A11 * B12
+    pthread_mutex_lock(&incmutex);threadnblocked = 1;
     if (threadn < threadnum && threadn >= 0){
+    threadnblocked = 0; pthread_mutex_unlock(&incmutex)
     if ( islevelblocked == 0) { 
     pthread_mutex_lock(&levelmutex);
     printf("levelblocked\n");islevelblocked = 1;}
@@ -207,9 +216,12 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     }
     } else
     simpleMatrixProizvCacheObliviousp(&argum[2]);
+    if (threadnblocked == 1) { threadnblocked = 0;pthread_mutex_unlock(&incmutex); }
     
     // C12 += A12 * B22
+    pthread_mutex_lock(&incmutex);threadnblocked = 1;
     if (threadn < threadnum && threadn >= 0){
+    threadnblocked = 0; pthread_mutex_unlock(&incmutex)
     if ( islevelblocked == 0) { 
     pthread_mutex_lock(&levelmutex);
     printf("levelblocked\n");islevelblocked = 1;}
@@ -225,9 +237,12 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     }
     } else
     simpleMatrixProizvCacheObliviousp(&argum[3]);
+    if (threadnblocked == 1) { threadnblocked = 0;pthread_mutex_unlock(&incmutex); }
 
     // C21 += A21 * B11
+    pthread_mutex_lock(&incmutex);threadnblocked = 1;
     if (threadn < threadnum && threadn >= 0){
+    threadnblocked = 0; pthread_mutex_unlock(&incmutex)
     if ( islevelblocked == 0) { 
     pthread_mutex_lock(&levelmutex);
     printf("levelblocked\n");islevelblocked = 1;}
@@ -243,9 +258,12 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     }
     } else
     simpleMatrixProizvCacheObliviousp(&argum[4]);
+    if (threadnblocked == 1) { threadnblocked = 0;pthread_mutex_unlock(&incmutex); }
     
     // C21 += A22 * B21
+    pthread_mutex_lock(&incmutex);threadnblocked = 1;
     if (threadn < threadnum && threadn >= 0){
+    threadnblocked = 0; pthread_mutex_unlock(&incmutex)
     if ( islevelblocked == 0) { 
     pthread_mutex_lock(&levelmutex);
     printf("levelblocked\n");islevelblocked = 1;}
@@ -261,9 +279,12 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     }
     } else
     simpleMatrixProizvCacheObliviousp(&argum[5]);
+    if (threadnblocked == 1) { threadnblocked = 0;pthread_mutex_unlock(&incmutex); }
 
     // C22 += A21 * B12
+    pthread_mutex_lock(&incmutex);threadnblocked = 1;
     if (threadn < threadnum && threadn >= 0){
+    threadnblocked = 0; pthread_mutex_unlock(&incmutex)
     if ( islevelblocked == 0) { 
     pthread_mutex_lock(&levelmutex);
     printf("levelblocked\n");islevelblocked = 1;}
@@ -279,6 +300,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     }
     } else
     simpleMatrixProizvCacheObliviousp(&argum[6]);
+    if (threadnblocked == 1) { threadnblocked = 0;pthread_mutex_unlock(&incmutex); }
     
     if (islevelblocked == 1) {
     printf("levelunblocked\n");
