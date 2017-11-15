@@ -2,6 +2,7 @@
 #include <pthread.h>
 extern int threadnum;
 extern int threadn;
+  int islevelblocked = 0;
 int level = 1;
 int levelt = 1;
 pthread_mutex_t incmutex = PTHREAD_MUTEX_INITIALIZER;
@@ -119,7 +120,6 @@ void simpleMatrixProizvCacheOblivious(int32_t *C,  int32_t *A,  int32_t *B,
 void * simpleMatrixProizvCacheObliviousp(void* ptr)
 {
   dat * p = (dat *)(ptr);
-  int islevelblocked = 0;
   //  printf("%d\n", p->size); 
   level=levelt;
   if (p->size == 2)
