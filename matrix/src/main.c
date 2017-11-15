@@ -138,7 +138,7 @@ int main(int argc, char** argv)
   
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      printf("%d ", one[i * size + j]);
+      printf("%d\t", one[i * size + j]);
     }
       printf("\n");
   }
@@ -146,7 +146,7 @@ int main(int argc, char** argv)
   
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      printf("%d ", two[i * size + j]);
+      printf("%d\t", two[i * size + j]);
     }
       printf("\n");
   }
