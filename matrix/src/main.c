@@ -91,7 +91,7 @@ int main(int argc, char** argv)
   }
   free(matrixRezult);
 
-  for (i = 0; ; i++) {
+  for (i = -1; ; i++) {
     if ((size > myPow(2,i)) & (size <= myPow(2, i + 1))) {
       realSize = myPow(2, i + 1);
       break;
