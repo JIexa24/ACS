@@ -150,6 +150,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
 {p->C + ind22, p->A + ind22, p->B + ind22, tsize, p->rowsize}
 };
 
+    if (threadn < threadnum && threadn >= 0)
     pthread_mutex_lock(&levelmutex);
     // C11 += A11 * B11
     if (threadn < threadnum && threadn >= 0){
@@ -158,6 +159,9 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
+    if (threadn >= threadnum) {
+    pthread_mutex_unlock(&levelmutex);
+    }
     } else
     simpleMatrixProizvCacheObliviousp(&argum[0]);
     
@@ -168,6 +172,9 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
+    if (threadn >= threadnum) {
+    pthread_mutex_unlock(&levelmutex);
+    }
     } else
     simpleMatrixProizvCacheObliviousp(&argum[1]);
 
@@ -178,6 +185,9 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
+    if (threadn >= threadnum) {
+    pthread_mutex_unlock(&levelmutex);
+    }
     } else
     simpleMatrixProizvCacheObliviousp(&argum[2]);
     
@@ -188,6 +198,9 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
+    if (threadn >= threadnum) {
+    pthread_mutex_unlock(&levelmutex);
+    }
     } else
     simpleMatrixProizvCacheObliviousp(&argum[3]);
 
@@ -198,6 +211,9 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
+    if (threadn >= threadnum) {
+    pthread_mutex_unlock(&levelmutex);
+    }
     } else
     simpleMatrixProizvCacheObliviousp(&argum[4]);
     
@@ -208,6 +224,9 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
+    if (threadn >= threadnum) {
+    pthread_mutex_unlock(&levelmutex);
+    }
     } else
     simpleMatrixProizvCacheObliviousp(&argum[5]);
 
@@ -218,8 +237,12 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);
     threadn++;
     pthread_mutex_unlock(&incmutex);
+    if (threadn >= threadnum) {
+    pthread_mutex_unlock(&levelmutex);
+    }
     } else
     simpleMatrixProizvCacheObliviousp(&argum[6]);
+    
     
     pthread_mutex_unlock(&levelmutex);
     
