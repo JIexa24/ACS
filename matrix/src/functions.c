@@ -156,7 +156,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
 };
 
     // C11 += A11 * B11
-    if (threadnum > 0){
+    if (threadnum > 0 && p->size > 1024){
       
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn <= threadnum && p->needlevel == p->cursorlevel) {
@@ -174,7 +174,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[0]);
     
     // C11 += A12 * B21
-    if (threadnum > 0){
+    if (threadnum > 0 && p->size > 1024){
       
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn <= threadnum && p->needlevel == p->cursorlevel) {
@@ -192,7 +192,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[1]);
       
     // C12 += A11 * B12
-    if (threadnum > 0){
+    if (threadnum > 0 && p->size > 1024){
       
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn <= threadnum && p->needlevel == p->cursorlevel) {
@@ -210,7 +210,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[2]);
       
     // C12 += A12 * B22
-    if (threadnum > 0){
+    if (threadnum > 0 && p->size > 1024){
       
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn <= threadnum && p->needlevel == p->cursorlevel) {
@@ -229,7 +229,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
 
       
     // C21 += A21 * B11
-    if (threadnum > 0){
+    if (threadnum > 0 && p->size > 1024){
       
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn <= threadnum && p->needlevel == p->cursorlevel) {
@@ -247,7 +247,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[4]);
     
     // C21 += A22 * B21
-    if (threadnum > 0){
+    if (threadnum > 0 && p->size > 1024){
       
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn <= threadnum && p->needlevel == p->cursorlevel) {
@@ -265,13 +265,14 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[5]);
     
     // C22 += A21 * B12
-    if (threadnum > 0){
+    if (threadnum > 0 && p->size > 1024){
       
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn <= threadnum && p->needlevel == p->cursorlevel) {
     threadn++;
       printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
     pthread_create(&tid[6],NULL,simpleMatrixProizvCacheObliviousp, &argum[6]);
+      pthread_join(&tid[6], NULL);
     } else {
       pthread_mutex_unlock(&incmutex);
       simpleMatrixProizvCacheObliviousp(&argum[6]);
@@ -283,7 +284,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[6]);
 
     // C22 += A22 * B22
-    if (threadnum > 0 && p->needlevel > 1){
+    if (threadnum > 0 && p->needlevel > 1 && p->size > 1024){
       
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn <= threadnum && p->needlevel == p->cursorlevel) {
@@ -306,6 +307,9 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);
     threadn--;
       pthread_mutex_unlock(&incmutex);
+  }
+  if (p->cursorlevel == 1){
+    while (threadn > 0);
   }
   return NULL;
 }
