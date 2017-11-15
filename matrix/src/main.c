@@ -90,7 +90,7 @@ int main(int argc, char** argv)
     free(matrixRezult[i]);
   }
   free(matrixRezult);
-
+  if (size > 1)
   for (i = 0; ; i++) {
     if ((size > myPow(2,i)) & (size <= myPow(2, i + 1))) {
       realSize = myPow(2, i + 1);
