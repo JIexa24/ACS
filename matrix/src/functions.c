@@ -6,6 +6,7 @@ int level = 1;
 int levelt = 1;
 pthread_mutex_t incmutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t decmutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t levelmutex = PTHREAD_MUTEX_INITIALIZER;
 
 int myPow(int a, int b)
 {
@@ -149,6 +150,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
 {p->C + ind22, p->A + ind22, p->B + ind22, tsize, p->rowsize}
 };
 
+    pthread_mutex_lock(&levelmutex);
     // C11 += A11 * B11
     if (threadn < threadnum && threadn >= 0){
     pthread_create(&tid[0],NULL,simpleMatrixProizvCacheObliviousp, &argum[0]);
@@ -218,6 +220,8 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
       printf("thread %d %d!\n",threadn,threadnum);
     } else
     simpleMatrixProizvCacheObliviousp(&argum[6]);
+    
+    pthread_mutex_unlock(&levelmutex);
     
     pthread_mutex_lock(&incmutex);
     levelt++;
