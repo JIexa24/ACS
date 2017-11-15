@@ -142,6 +142,7 @@ int main(int argc, char** argv)
     }
       printf("\n");
   }
+      printf("\n");
   
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
@@ -149,12 +150,14 @@ int main(int argc, char** argv)
     }
       printf("\n");
   }
+      printf("\n");
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
       printf("%d ", rezult[i * size + j]);
     }
       printf("\n");
   }
+      printf("\n");
   printf("simpleMatrixProizvCacheOblivious\t%.6lf \n" , time);
 
 
