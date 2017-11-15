@@ -126,7 +126,7 @@ int main(int argc, char** argv)
     }
   }
 
-      printf("%d\n",realSize);
+   //   printf("%d\n",realSize);
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
       rezult[i * size + j] = 0;
