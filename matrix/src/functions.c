@@ -152,7 +152,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
 
     if (threadn < threadnum && threadn >= 0){
     pthread_mutex_lock(&levelmutex);
-    printf("levelblocked\n")
+    printf("levelblocked\n");
     }
     // C11 += A11 * B11
     if (threadn < threadnum && threadn >= 0){
