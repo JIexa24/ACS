@@ -292,7 +292,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
  // }
 //  p->thr[0]--;
   }
-  if (threadn >= 0) {
+  if (threadn > 0) {
   pthread_mutex_lock(&decmutex);
   threadn--;
   pthread_mutex_unlock(&decmutex);
