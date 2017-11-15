@@ -126,18 +126,19 @@ int main(int argc, char** argv)
     }
   }
 
+      printf("%d\n",realSize);
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
       rezult[i * size + j] = 0;
     }
   }
 
-  for (i = 0; i < realSize; i++) {
+/*  for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
       printf("%d(%d %d|%d %d)\t", one[i * size + j], i , j, size, realSize);
     }
       printf("\n");
-  }
+  }*/
       printf("\n");
   threadnum = 0;
   threadn = 0;
