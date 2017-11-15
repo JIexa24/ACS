@@ -22,6 +22,7 @@ int main(int argc, char** argv)
   int realSize           = 2;
   int32_t min            = -5;
   int32_t max            = 5;
+  int needlevel = 0;
 
   matrixOne = (int32_t**)malloc(sizeof(int32_t*) * realSize);
   for (i = 0; i < realSize; i++) {
@@ -142,9 +143,17 @@ int main(int argc, char** argv)
       printf("\n");
   threadnum = 0;
   threadn = 0;
-  threadnum = argc > 2 ? atoi(argv[2]) : 4;
-   
-  dat datat = {rezult,one, two,realSize,realSize, 0, 0};
+  threadnum = argc > 2 ? atoi(argv[2]) -  1 : 3;
+
+  if (threadnum <= 7) needlevel = 1;
+  for (i = 1; ; i++) {
+    if (threadnum < (pow(8,i + 1)) && threadnum >= (pow(8,i)) {
+     needlevel = i + 1;
+      break;
+    }
+  }
+  
+  dat datat = {rezult,one, two,realSize,realSize, 0, needlevel};
   time = wtime();
    simpleMatrixProizvCacheObliviousp(&datat);
 //  simpleMatrixProizvCacheOblivious(rezult, one, two, realSize, realSize);
