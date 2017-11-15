@@ -4,7 +4,7 @@
 extern int threadnum;
 extern int threadn;
 
-extern int print = 0;
+extern int print;
 int mutlock = 0;
 
 pthread_mutex_t incmutex = PTHREAD_MUTEX_INITIALIZER;
