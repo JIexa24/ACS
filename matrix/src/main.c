@@ -196,7 +196,7 @@ int main(int argc, char** argv)
   }
   }
       printf("\n");
-  printf("simpleMatrixProizvCacheOblivious\t%.6lf \n" , time);
+  printf("simpleMatrixProizvCacheOblivious\t%.6lf \n\n" , time);
 
 
   return 0;
