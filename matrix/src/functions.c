@@ -296,7 +296,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[6]);
 
     // C22 += A22 * B22
-    if (threadnum > 0 && p->needlevel > 1 && p->size > TRESHOLD){
+    if (threadnum > 0 && p->size > TRESHOLD){
       
     pthread_mutex_lock(&incmutex);mutlock = 1;
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
@@ -324,7 +324,6 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);
     threadn--;
       pthread_mutex_unlock(&incmutex);
-      if(print) 
       printf("thread exit\n", threadn - 1, threadnum, p->cursorlevel);
   }
   if (p->cursorlevel == 1){
