@@ -133,12 +133,12 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     const int ind12 = 1;
     const int ind21 = p->rowsize;
     const int ind22 = p->rowsize + 1;
- //pthread_mutex_lock(&compmut);
+ pthread_mutex_lock(&compmut);
     p->C[ind11] += p->A[ind11] * p->B[ind11] + p->A[ind12] * p->B[ind21];
     p->C[ind12] += p->A[ind11] * p->B[ind12] + p->A[ind12] * p->B[ind22];
     p->C[ind21] += p->A[ind21] * p->B[ind11] + p->A[ind22] * p->B[ind21];
     p->C[ind22] += p->A[ind21] * p->B[ind12] + p->A[ind22] * p->B[ind22];
-   //pthread_mutex_unlock(&compmut);
+   pthread_mutex_unlock(&compmut);
   } else {
     int tsize = p->size/2;
     const int ind11 = 0;
