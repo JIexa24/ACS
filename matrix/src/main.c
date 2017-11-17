@@ -104,7 +104,7 @@ int main(int argc, char** argv)
   one = (int32_t*)malloc(sizeof(int32_t) * realSize * realSize);
   two = (int32_t*)malloc(sizeof(int32_t) * realSize * realSize);
   rezult = (int32_t*)malloc(sizeof(int32_t) * realSize * realSize);
-  printf("%d %d\n",size, realSize)
+  printf("%d %d\n",size, realSize);
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
         one[i * size + j] = j+1;
