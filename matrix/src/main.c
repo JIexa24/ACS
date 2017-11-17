@@ -159,10 +159,13 @@ int main(int argc, char** argv)
   print = flg;  
   printf("needlvl %d\n",needlevel);
   dat datat = {rezult,one, two,realSize,realSize, 1, needlevel, 0};
+  pthread_spin_init(&spinlock, PTHREAD_PROCESS_PRIVATE);
   time = wtime();
    simpleMatrixProizvCacheObliviousp(&datat);
 //  simpleMatrixProizvCacheOblivious(rezult, one, two, realSize, realSize);
   time = wtime() - time;
+  pthread_spin_destroy(&spinlock);
+
   
 //  sleep(2);
 //  int flg = argc > 3 ? atoi(argv[3]) : 0;
