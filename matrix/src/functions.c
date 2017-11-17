@@ -1,6 +1,7 @@
 #include "../include/functions.h"
 #include <pthread.h>
 #define TRESHOLD 511
+#define DEADSIZE 4
 extern int threadnum;
 extern int threadn;
 
@@ -155,7 +156,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
 };
 
     // C11 += A11 * B11
-    if (threadnum > 0 && p->size > TRESHOLD){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
       
     pthread_mutex_lock(&incmutex);
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
@@ -174,7 +175,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[0]);
     
     // C11 += A12 * B21
-    if (threadnum > 0 && p->size > TRESHOLD){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
       
     pthread_mutex_lock(&incmutex);
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
@@ -193,7 +194,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[1]);
       
     // C12 += A11 * B12
-    if (threadnum > 0 && p->size > TRESHOLD){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
       
     pthread_mutex_lock(&incmutex);
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
@@ -211,7 +212,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[2]);
       
     // C12 += A12 * B22
-    if (threadnum > 0 && p->size > TRESHOLD){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
       
     pthread_mutex_lock(&incmutex);
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
@@ -231,7 +232,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
 
       
     // C21 += A21 * B11
-    if (threadnum > 0 && p->size > TRESHOLD){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
       
     pthread_mutex_lock(&incmutex);
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
@@ -250,7 +251,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[4]);
     
     // C21 += A22 * B21
-    if (threadnum > 0 && p->size > TRESHOLD){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
       
     pthread_mutex_lock(&incmutex);
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
@@ -269,7 +270,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[5]);
     
     // C22 += A21 * B12
-    if (threadnum > 0 && p->size > TRESHOLD){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
       
     pthread_mutex_lock(&incmutex);
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
@@ -288,7 +289,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[6]);
 
     // C22 += A22 * B22
-    if (threadnum > 0 && p->size > TRESHOLD){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
       
     pthread_mutex_lock(&incmutex);
     if (threadn < threadnum && p->needlevel == p->cursorlevel) {
