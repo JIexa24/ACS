@@ -107,13 +107,25 @@ int main(int argc, char** argv)
   printf("%d %d\n",size, realSize);
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-        one[i * size + j] = j+1;
+      if (i >= size) {
+        one[i * realSize + j] = 0;
+      } else if ( j >= size) {
+        one[i * realSize + j] = 0;
+      } else {
+         one[i * realSize + j] = j+1;
+      }
     }
   }
 
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-        two[i * size + j] = i+1;
+      if (i >= size) {
+        two[i * realSize + j] = 0;
+      } else if ( j >= size) {
+        two[i * realSize + j] = 0;
+      } else {
+          two[i * realSize + j] = i+1;
+      }
     }
   }
 
