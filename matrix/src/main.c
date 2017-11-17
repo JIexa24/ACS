@@ -200,7 +200,7 @@ int main(int argc, char** argv)
   for (i = 1; i <= size; i++) {
     sum += myPow(i,2);
   }
-  printf("%d ==%d\n",rezult[(size - 1)*(size-1)]), sum);
+  printf("%d ==%d\n",rezult[(size - 1)*(size-1)], sum);
   
     free(two);
     free(one);
