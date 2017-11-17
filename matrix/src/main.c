@@ -196,7 +196,14 @@ int main(int argc, char** argv)
   }
       printf("\n");
   printf("simpleMatrixProizvCacheOblivious\t%.6lf \n\n" , time - cntr * 2);
-
-
+  int sum = 0;
+  for (i = 1; i <= size; i++) {
+    sum += myPow(i,2);
+  }
+  printf("%d ==%d\n",rezult[(size - 1)*(size-1)]), sum);
+  
+    free(two);
+    free(one);
+    free(rezult);
   return 0;
 }
