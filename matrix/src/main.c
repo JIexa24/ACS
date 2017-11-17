@@ -142,7 +142,7 @@ int main(int argc, char** argv)
       printf("\n");
   threadnum = 0;
   threadn = 0;
-  threadnum = argc > 2 ? atoi(argv[2]) -  1 : 0;
+  threadnum = argc > 2 ? atoi(argv[2]) : 0;
 
   printf("threadn %d\n",threadn);
   printf("threadnum %d\n",threadnum);
