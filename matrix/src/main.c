@@ -112,7 +112,7 @@ int main(int argc, char** argv)
       } else if ( j >= size) {
         one[i * size + j] = 0;
       } else {
-        one[i * size + j] = i;
+        one[i * size + j] = i+1;
       }
     }
   }
@@ -124,7 +124,7 @@ int main(int argc, char** argv)
       } else if ( j >= size) {
         two[i * size + j] = 0;
       } else {
-        two[i * size + j] = j;
+        two[i * size + j] = j+1;
       }
     }
   }
