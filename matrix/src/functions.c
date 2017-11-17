@@ -158,11 +158,12 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
 };
 
     // C11 += A11 * B11
-    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE && p->needlevel == p->cursorlevel ){
       
+    while(threadn >= treadnum - 1);
+    pthread_mutex_lock(&createthrmutex);
     pthread_mutex_lock(&incmutex);
-    if (p->needlevel == p->cursorlevel) {
-    //while(threadn < treadnum){ pthread_mutex_lock(&createthrmutex); break;}
+    if (threadn < threadnum) {
     threadn++;
     pthread_mutex_unlock(&incmutex);
       if(print) 
@@ -179,16 +180,19 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[0]);
     
     // C11 += A12 * B21
-    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE && p->needlevel == p->cursorlevel){
       
+    while(threadn >= treadnum - 1);
+    pthread_mutex_lock(&createthrmutex);
     pthread_mutex_lock(&incmutex);
-    if (threadn < threadnum && p->needlevel == p->cursorlevel) {
+    if (threadn < threadnum) {
     threadn++;
     pthread_mutex_unlock(&incmutex);
       if(print) 
       printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
       argum[1].isthread = 1;
     pthread_create(&tid[1],NULL,simpleMatrixProizvCacheObliviousp, &argum[1]);
+      pthread_mutex_unlock(&createthrmutex);
     } else {
     pthread_mutex_unlock(&incmutex);
       simpleMatrixProizvCacheObliviousp(&argum[1]);
@@ -198,16 +202,19 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[1]);
       
     // C12 += A11 * B12
-    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE && p->needlevel == p->cursorlevel){
       
+    while(threadn >= treadnum - 1);
+    pthread_mutex_lock(&createthrmutex);
     pthread_mutex_lock(&incmutex);
-    if (threadn < threadnum && p->needlevel == p->cursorlevel) {
+    if (threadn < threadnum) {
     threadn++;
     pthread_mutex_unlock(&incmutex);
       if(print) 
       printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
       argum[2].isthread = 1;
     pthread_create(&tid[2],NULL,simpleMatrixProizvCacheObliviousp, &argum[2]);
+      pthread_mutex_unlock(&createthrmutex);
     } else {
     pthread_mutex_unlock(&incmutex);
       simpleMatrixProizvCacheObliviousp(&argum[2]);
@@ -216,16 +223,19 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[2]);
       
     // C12 += A12 * B22
-    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE && p->needlevel == p->cursorlevel){
       
+    while(threadn >= treadnum - 1);
+    pthread_mutex_lock(&createthrmutex);
     pthread_mutex_lock(&incmutex);
-    if (threadn < threadnum && p->needlevel == p->cursorlevel) {
+    if (threadn < threadnum) {
     threadn++;
     pthread_mutex_unlock(&incmutex);
       if(print) 
       printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
       argum[3].isthread = 1;
     pthread_create(&tid[3],NULL,simpleMatrixProizvCacheObliviousp, &argum[3]);
+      pthread_mutex_unlock(&createthrmutex);
     } else {
     pthread_mutex_unlock(&incmutex);
       simpleMatrixProizvCacheObliviousp(&argum[3]);
@@ -236,16 +246,19 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
 
       
     // C21 += A21 * B11
-    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE && p->needlevel == p->cursorlevel){
       
+    while(threadn >= treadnum - 1);
+    pthread_mutex_lock(&createthrmutex);
     pthread_mutex_lock(&incmutex);
-    if (threadn < threadnum && p->needlevel == p->cursorlevel) {
+    if (threadn < threadnum) {
     threadn++;
     pthread_mutex_unlock(&incmutex);
       if(print) 
       printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
       argum[4].isthread = 1;
     pthread_create(&tid[4],NULL,simpleMatrixProizvCacheObliviousp, &argum[4]);
+      pthread_mutex_unlock(&createthrmutex);
     } else {
     pthread_mutex_unlock(&incmutex);
       simpleMatrixProizvCacheObliviousp(&argum[4]);
@@ -255,16 +268,19 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[4]);
     
     // C21 += A22 * B21
-    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE && p->needlevel == p->cursorlevel){
       
+    while(threadn >= treadnum - 1);
+    pthread_mutex_lock(&createthrmutex);
     pthread_mutex_lock(&incmutex);
-    if (threadn < threadnum && p->needlevel == p->cursorlevel) {
+    if (threadn < threadnum) {
     threadn++;
     pthread_mutex_unlock(&incmutex);
       if(print) 
       printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
       argum[5].isthread = 1;
     pthread_create(&tid[5],NULL,simpleMatrixProizvCacheObliviousp, &argum[5]);
+      pthread_mutex_unlock(&createthrmutex);
     } else {
     pthread_mutex_unlock(&incmutex);
       simpleMatrixProizvCacheObliviousp(&argum[5]);
@@ -274,16 +290,19 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[5]);
     
     // C22 += A21 * B12
-    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE && p->needlevel == p->cursorlevel){
       
+    while(threadn >= treadnum - 1);
+    pthread_mutex_lock(&createthrmutex);
     pthread_mutex_lock(&incmutex);
-    if (threadn < threadnum && p->needlevel == p->cursorlevel) {
+    if (threadn < threadnum) {
     threadn++;
     pthread_mutex_unlock(&incmutex);
       if(print) 
       printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
       argum[6].isthread = 1;
     pthread_create(&tid[6],NULL,simpleMatrixProizvCacheObliviousp, &argum[6]);
+      pthread_mutex_unlock(&createthrmutex);
     } else {
     pthread_mutex_unlock(&incmutex);
       simpleMatrixProizvCacheObliviousp(&argum[6]);
@@ -293,16 +312,19 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     simpleMatrixProizvCacheObliviousp(&argum[6]);
 
     // C22 += A22 * B22
-    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
+    if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE && p->needlevel == p->cursorlevel){
       
+    while(threadn >= treadnum - 1);
+    pthread_mutex_lock(&createthrmutex);
     pthread_mutex_lock(&incmutex);
-    if (threadn < threadnum && p->needlevel == p->cursorlevel) {
+    if (threadn < threadnum) {
     threadn++;
     pthread_mutex_unlock(&incmutex);
       if(print) 
       printf("(7)thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
       argum[7].isthread = 1;
     pthread_create(&tid[7],NULL,simpleMatrixProizvCacheObliviousp, &argum[7]);
+      pthread_mutex_unlock(&createthrmutex);
       pthread_join(tid[7], NULL);
       if(print) 
       printf("(7)thread %d is %d join success! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
