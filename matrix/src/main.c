@@ -112,7 +112,7 @@ int main(int argc, char** argv)
       } else if ( j >= size) {
         one[i * size + j] = 0;
       } else {
-        one[i * size + j] = getrand(min,max);
+        one[i * size + j] = i;
       }
     }
   }
@@ -124,7 +124,7 @@ int main(int argc, char** argv)
       } else if ( j >= size) {
         two[i * size + j] = 0;
       } else {
-        two[i * size + j] = getrand(min,max);
+        two[i * size + j] = j;
       }
     }
   }
@@ -167,9 +167,7 @@ int main(int argc, char** argv)
    simpleMatrixProizvCacheObliviousp(&datat);
 //  simpleMatrixProizvCacheOblivious(rezult, one, two, realSize, realSize);
   time = wtime() - time;
-  printf("%d\n",threadn);
-  //while(threadn > 0);
-  printf("%d\n",threadn);
+  
 //  sleep(2);
 //  int flg = argc > 3 ? atoi(argv[3]) : 0;
   //print = flg;
