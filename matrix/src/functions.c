@@ -324,7 +324,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     pthread_mutex_lock(&incmutex);
     threadn--;
       pthread_mutex_unlock(&incmutex);
-      printf("thread exit\n", threadn - 1, threadnum, p->cursorlevel);
+      printf("thread exit %d %d %d\n", threadn, threadnum, p->cursorlevel);
   }
   if (p->cursorlevel == 1){
     while (threadn > 0){ printf("do nothing\n"); sleep(2);}
