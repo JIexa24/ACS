@@ -11,6 +11,7 @@ int mutlock = 0;
 
 pthread_mutex_t incmutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t compmut = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t createthrmutex = PTHREAD_MUTEX_INITIALIZER;
 
 int myPow(int a, int b)
 {
@@ -160,13 +161,15 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
     if (threadnum > 0 && p->size > TRESHOLD && p->size > DEADSIZE){
       
     pthread_mutex_lock(&incmutex);
-    if (threadn < threadnum && p->needlevel == p->cursorlevel) {
+    if (p->needlevel == p->cursorlevel) {
+    //while(threadn < treadnum){ pthread_mutex_lock(&createthrmutex); break;}
     threadn++;
     pthread_mutex_unlock(&incmutex);
       if(print) 
       printf("thread %d is %d! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
       argum[0].isthread = 1;
     pthread_create(&tid[0],NULL,simpleMatrixProizvCacheObliviousp, &argum[0]);
+      pthread_mutex_unlock(&createthrmutex);
     } else {
       pthread_mutex_unlock(&incmutex);
       simpleMatrixProizvCacheObliviousp(&argum[0]);
