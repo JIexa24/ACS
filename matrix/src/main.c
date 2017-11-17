@@ -109,6 +109,8 @@ int main(int argc, char** argv)
     for (j = 0; j < realSize; j++) {
       if (i < size && j < size) {
          one[i * realSize + j] = j+1;
+      } else {
+         one[i * realSize + j] = 0;
       }
     }
   }
@@ -117,6 +119,8 @@ int main(int argc, char** argv)
     for (j = 0; j < realSize; j++) {
       if (i < size && j < size) {
           two[i * realSize + j] = i+1;
+      } else {
+         two[i * realSize + j] = 0;
       }
     }
   }
@@ -166,7 +170,7 @@ int main(int argc, char** argv)
   if (flg > 1){
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      printf("%d\t", one[i * size + j]);
+      printf("%d\t", one[i * realSize + j]);
     }
       printf("\n");
   }
@@ -174,14 +178,14 @@ int main(int argc, char** argv)
   
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      printf("%d\t", two[i * size + j]);
+      printf("%d\t", two[i * realSize + j]);
     }
       printf("\n");
   }
       printf("\n");
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      printf("%d\t", rezult[i * size + j]);
+      printf("%d\t", rezult[i * realSize + j]);
     }
       printf("\n");
   }
