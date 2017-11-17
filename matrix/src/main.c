@@ -101,9 +101,9 @@ int main(int argc, char** argv)
     }
   }
 
-  one = (int32_t*)calloc(sizeof(int32_t) * realSize * realSize);
-  two = (int32_t*)calloc(sizeof(int32_t) * realSize * realSize);
-  rezult = (int32_t*)calloc(sizeof(int32_t) * realSize * realSize);
+  one = (int32_t*)calloc(realSize * realSize, sizeof(int32_t));
+  two = (int32_t*)calloc(realSize * realSize, sizeof(int32_t));
+  rezult = (int32_t*)calloc(realSize * realSize, sizeof(int32_t));
   printf("%d %d\n",size, realSize);
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
