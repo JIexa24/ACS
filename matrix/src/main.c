@@ -2,6 +2,7 @@
 int threadnum = 7;
 int threadn;
 int print;
+int cntr = 0;
 int getrand(int32_t min, int32_t max)
 {
   return (double)rand() / (RAND_MAX + 1.0) * (max - min) + min;
@@ -196,7 +197,7 @@ int main(int argc, char** argv)
   }
   }
       printf("\n");
-  printf("simpleMatrixProizvCacheOblivious\t%.6lf \n\n" , time);
+  printf("simpleMatrixProizvCacheOblivious\t%.6lf \n\n" , time - cntr * 2);
 
 
   return 0;
