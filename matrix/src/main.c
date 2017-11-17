@@ -3,6 +3,7 @@ int threadnum = 7;
 int threadn;
 int print;
 int cntr = 0;
+extern pthread_spinlock_t complock;
 int getrand(int32_t min, int32_t max)
 {
   return (double)rand() / (RAND_MAX + 1.0) * (max - min) + min;
