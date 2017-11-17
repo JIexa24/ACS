@@ -101,17 +101,13 @@ int main(int argc, char** argv)
     }
   }
 
-  one = (int32_t*)malloc(sizeof(int32_t) * realSize * realSize);
-  two = (int32_t*)malloc(sizeof(int32_t) * realSize * realSize);
-  rezult = (int32_t*)malloc(sizeof(int32_t) * realSize * realSize);
+  one = (int32_t*)calloc(sizeof(int32_t) * realSize * realSize);
+  two = (int32_t*)calloc(sizeof(int32_t) * realSize * realSize);
+  rezult = (int32_t*)calloc(sizeof(int32_t) * realSize * realSize);
   printf("%d %d\n",size, realSize);
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      if (i >= size) {
-        one[i * realSize + j] = 0;
-      } else if ( j >= size) {
-        one[i * realSize + j] = 0;
-      } else {
+      if (i < size && j < size) {
          one[i * realSize + j] = j+1;
       }
     }
@@ -119,11 +115,7 @@ int main(int argc, char** argv)
 
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      if (i >= size) {
-        two[i * realSize + j] = 0;
-      } else if ( j >= size) {
-        two[i * realSize + j] = 0;
-      } else {
+      if (i < size && j < size) {
           two[i * realSize + j] = i+1;
       }
     }
