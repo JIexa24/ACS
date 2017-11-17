@@ -107,25 +107,13 @@ int main(int argc, char** argv)
 
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      if (i >= size) {
-        one[i * size + j] = 0;
-      } else if ( j >= size) {
-        one[i * size + j] = 0;
-      } else {
         one[i * size + j] = j+1;
-      }
     }
   }
 
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      if (i >= size) {
-        two[i * size + j] = 0;
-      } else if ( j >= size) {
-        two[i * size + j] = 0;
-      } else {
         two[i * size + j] = i+1;
-      }
     }
   }
 
