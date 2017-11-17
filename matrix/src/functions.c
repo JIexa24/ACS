@@ -4,6 +4,7 @@
 #define DEADSIZE 4
 extern int threadnum;
 extern int threadn;
+extern int cntr;
 
 extern int print;
 int mutlock = 0;
@@ -319,7 +320,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
       printf("thread exit %d %d %d\n", threadn, threadnum, p->cursorlevel);
   }
   if (p->cursorlevel == 1){
-    while (threadn > 0){ printf("do nothing\n"); sleep(2);}
+    while (threadn > 0){ printf("do nothing\n"); cntr++; sleep(2);}
   }
   return NULL;
 }
