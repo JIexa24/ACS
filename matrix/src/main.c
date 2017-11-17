@@ -146,9 +146,9 @@ int main(int argc, char** argv)
 
   printf("threadn %d\n",threadn);
   printf("threadnum %d\n",threadnum);
-  if (threadnum <= 7) needlevel = 1;
-  for (i = 0; ; i++) {
-    if (threadnum < (myPow(8,i + 1)) && threadnum >= (myPow(8,i))) {
+  if (threadnum <= 8) needlevel = 1;
+  for (i = 0; ; i++){
+    if (threadnum <= (myPow(8,i + 1)) && threadnum > (myPow(8,i))) {
      needlevel = i + 1;
       break;
     }
