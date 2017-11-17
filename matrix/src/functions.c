@@ -328,9 +328,9 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
       argum[7].isthread = 1;
     pthread_create(&tid[7],NULL,simpleMatrixProizvCacheObliviousp, &argum[7]);
       pthread_mutex_unlock(&createthrmutex);
-      pthread_join(tid[7], NULL);
-      if(print) 
-      printf("(7)thread %d is %d join success! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
+     // pthread_join(tid[7], NULL);
+      //if(print) 
+      //printf("(7)thread %d is %d join success! level = %d\n", threadn - 1, threadnum, p->cursorlevel);
     } else {
       pthread_mutex_unlock(&incmutex);
       simpleMatrixProizvCacheObliviousp(&argum[7]);
@@ -349,7 +349,7 @@ void * simpleMatrixProizvCacheObliviousp(void* ptr)
       printf("thread exit %d %d %d\n", threadn, threadnum, p->cursorlevel);
   }
   if (p->cursorlevel == 1){
-    while (threadn > 0){ printf("do nothing\n"); cntr++; sleep(2);}
+    while (threadn > 0){ printf("do nothing %d\n", threadn); cntr++; sleep(2);}
   }
   return NULL;
 }

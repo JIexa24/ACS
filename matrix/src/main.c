@@ -195,7 +195,7 @@ int main(int argc, char** argv)
   }
   }
       printf("\n");
-  printf("simpleMatrixProizvCacheOblivious\t%.6lf \n\n" , time - cntr * 2);
+  printf("simpleMatrixProizvCacheOblivious\t%.6lf \n\n" , time - (cntr > 0 ? 2 : 0));// - cntr * 2);
   int sum = 0;
   for (i = 1; i <= size; i++) {
     sum += myPow(i,2);
