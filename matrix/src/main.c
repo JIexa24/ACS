@@ -70,10 +70,9 @@ pdat td = {matrixOne,matrixTwo,matrixRezult, 4,8,4,2};
 pdat td2 = {matrixOne,matrixTwo,matrixRezult, 2,8,4,0};
     time = wtime();
  // simpleMatrixProizvAsm(matrixOne, matrixTwo, matrixRezult, size);
-  pthread_create(&tid[0],NULL,simpleMatrixProizvAsmp, &td);
-  simpleMatrixProizvAsmp(&td2);
+  pthread_create(&tid[0],NULL,simpleMatrixProizvp, &td);
+  simpleMatrixProizvp(&td2);
   pthread_join(tid[0],NULL);
-  simpleMatrixProizvAsmp(&td);
   time = wtime() - time;
   printf("simpleMatrixProizvAsm\t%.6lf\n" , time);
 
