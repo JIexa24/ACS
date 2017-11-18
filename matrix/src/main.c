@@ -26,6 +26,7 @@ int main(int argc, char** argv)
   int32_t min            = -5;
   int32_t max            = 5;
   int needlevel = 0;
+  threadnum = argc > 2 ? atoi(argv[2]) : 0;
 
   matrixOne = (int32_t**)malloc(sizeof(int32_t*) * realSize);
   for (i = 0; i < realSize; i++) {
@@ -65,14 +66,17 @@ int main(int argc, char** argv)
       matrixRezult[i][j] = 0;
     }
   }
-    pthread_t tid[8];
-pdat td = {matrixOne,matrixTwo,matrixRezult, realSize,realSize,realSize,realSize/2};
-pdat td2 = {matrixOne,matrixTwo,matrixRezult, realSize/2,4,4,0};
+    pthread_t *tid = malloc(threadnum * sizeof(pthread_t));
+pdat td[2] = {{matrixOne,matrixTwo,matrixRezult, realSize,realSize,realSize,realSize/2},
+              {matrixOne,matrixTwo,matrixRezult, realSize/2,4,4,0}};
     time = wtime();
  // simpleMatrixProizvAsm(matrixOne, matrixTwo, matrixRezult, size);
-  pthread_create(&tid[0],NULL,simpleMatrixProizvp, &td);
-  simpleMatrixProizvp(&td2);
-  pthread_join(tid[0],NULL);
+  for(i = 0; i < threadnum; i++) {
+  pthread_create(&tid[i],NULL,simpleMatrixProizvp, &td[i]);
+  }
+  for(i = 0; i < threadnum; i++) {
+  pthread_join(tid[i],NULL);
+  }
   time = wtime() - time;
   printf("simpleMatrixProizvAsm\t%.6lf\n" , time);
 
@@ -147,7 +151,6 @@ pdat td2 = {matrixOne,matrixTwo,matrixRezult, realSize/2,4,4,0};
       printf("\n");
   threadnum = 0;
   threadn = 0;
-  threadnum = argc > 2 ? atoi(argv[2]) : 0;
 
   printf("threadn %d\n",threadn);
   printf("threadnum %d\n",threadnum);
