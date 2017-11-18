@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -masm=intel -pthread
+CFLAGS = -pthread
 
 .PHONY: all COMPILE
 
