@@ -27,6 +27,7 @@ int main(int argc, char** argv)
   int32_t max            = 5;
   int needlevel = 0;
   int sizei = size, sizek, sizej;
+  double time;
   threadnum = argc > 2 ? atoi(argv[2]) : 1;
   sizek = atoi(argv[3]);
   sizek = atoi(argv[4]);
@@ -73,8 +74,9 @@ int main(int argc, char** argv)
     td[i].C = matrixRezult;
     td[i].sizej = realSize;
     td[i].sizek = realSize;
-    td[i].starti = position;position+=step;
-    td[i].sizei = (i == threadnum - 1) ? realSize : pos;
+    td[i].starti = position;
+    position+=step;
+    td[i].sizei = (i == threadnum - 1) ? realSize : position;
     pthread_create(&tid[i],NULL,simpleMatrixProizvp, &td[i]);
   }
   for(i = 0; i < threadnum; i++) {
