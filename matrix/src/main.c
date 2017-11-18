@@ -66,19 +66,29 @@ int main(int argc, char** argv)
       matrixRezult[i][j] = 0;
     }
   }
-    pthread_t *tid = malloc(threadnum * sizeof(pthread_t));
-pdat td[2] = {{matrixOne,matrixTwo,matrixRezult, realSize,realSize,realSize,realSize/2},
+  int step = (int)((double)realSize/(double)threadnum);int position;
+  pthread_t *tid = malloc(threadnum * sizeof(pthread_t));
+  pdat *td = malloc(threadnum * sizeof(pdat));
+  
+  pdat td[2] = {{matrixOne,matrixOne,matrixRezult, realSize,realSize,realSize,realSize/2},
               {matrixOne,matrixTwo,matrixRezult, realSize/2,4,4,0}};
     time = wtime();
  // simpleMatrixProizvAsm(matrixOne, matrixTwo, matrixRezult, size);
   for(i = 0; i < threadnum; i++) {
-  pthread_create(&tid[i],NULL,simpleMatrixProizvp, &td[i]);
+    td[i].A = matrixOne;
+    td[i].B = matrixTwo;
+    td[i].C = matrixRezult;
+    td[i].sizej = realSize;
+    td[i].sizek = realSize;
+    td[i].starti = position;position+=step;
+    td[i].sizei = (i == threadnum - 1) ? realSize : pos;
+    pthread_create(&tid[i],NULL,simpleMatrixProizvp, &td[i]);
   }
   for(i = 0; i < threadnum; i++) {
   pthread_join(tid[i],NULL);
   }
   time = wtime() - time;
-  printf("simpleMatrixProizvAsm\t%.6lf\n" , time);
+  printf("simpleMatrixProizvp\t%.6lf\n" , time);
 
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
