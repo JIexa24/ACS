@@ -173,21 +173,46 @@ volatile float asmpowf(float num, int radix)
 
 int main(){
 
-int b = 4;
+int b = 4,i;
+double t , t1, t2, t3,t4;
+	double st, st1, st2,st3,st4;
+	for (i = 0; i < 10000; i++) {
 
-        double t = wtime();
-        int a = asmpowi(4,10);
-        t = wtime() - t;
-
-        double t1 = wtime();
+        t = wtime();
+		int a = asmpowi(4,10);
+        t = wtime() - t;st +=t;
+	}
+        st = st / 10000;
+	for (i = 0; i < 10000; i++) {
+        t1 = wtime();
         asmPowi(b,10);
-        t1 = wtime() - t1;
+        t1 = wtime() - t1;st1 +=t1;
+	}
+        st1 = st1 / 10000;
 
-        double t2 = wtime();
+	for (i = 0; i < 10000; i++) {
+        t2 = wtime();
         int c = pow(4,10);
-        t2 = wtime() - t2;
+        t2 = wtime() - t2;st2 +=t2;
+	}
+        st2 = st2 / 10000;
 
-	printf("\n%d | time = %.16lf\n%d | time = %.16lf\n%d | time = %.16lf\n", a,t, b,t1, c,t2);
-
+	printf("\n%d | time = %.16lf\n%d | time = %.16lf\n%d | time = %.16lf\n", a,st, b,st1, c,st2);
+        double r = 6.125;
+	double res = 0, resasm = 0;
+	
+	for (i = 0; i < 10000; i++) {
+        t3 = wtime();
+        res = pow(r,10);
+        t3 = wtime() - t3;st3 +=t3;
+	}
+        st3 = st3 / 10000;
+	for (i = 0; i < 10000; i++) {
+        t4 = wtime();
+		resasm = asmpowlf(r,10);
+        t4 = wtime() - t4;st4 +=t4;
+	}
+        st4 = st4 / 10000;
+	printf("\n%d | time = %.16lf\n%d | time = %.16lf\n%d | time = %.16lf\n", res, st3, resasm,st4);0
 	return 0;
 }
