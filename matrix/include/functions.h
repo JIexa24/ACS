@@ -19,6 +19,18 @@ typedef struct threaddata {
   int isthread;
 } dat;
 
+typedef struct pthreaddata {
+  int32_t **C;
+  int32_t **A;
+  int32_t **B;
+  int sizei;
+  int sizej;
+  int sizek;
+  int starti;
+  int startj;
+  int startk;
+} pdat;
+
 double wtime();
 int myPow(int a, int b);
 
