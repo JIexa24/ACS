@@ -65,9 +65,10 @@ int main(int argc, char** argv)
       matrixRezult[i][j] = 0;
     }
   }
-
+tdat td;
   time = wtime();
  // simpleMatrixProizvAsm(matrixOne, matrixTwo, matrixRezult, size);
+  simpleMatrixProizvAsmp(&td);
   time = wtime() - time;
   printf("simpleMatrixProizvAsm\t%.6lf\n" , time);
 
