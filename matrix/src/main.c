@@ -62,7 +62,7 @@ int main(int argc, char** argv)
     }
   }
 
-  int step = (int)((double)realSize/(double)threadnum);int position;
+  int step = (int)((double)realSize/(double)threadnum);int position = 0;
   pthread_t *tid = malloc(threadnum * sizeof(pthread_t));
   pdat *td = malloc(threadnum * sizeof(pdat));
   
@@ -76,7 +76,7 @@ int main(int argc, char** argv)
     td[i].sizek = realSize;
     td[i].starti = position;
     position+=step;
-    td[i].sizei = (i == threadnum - 1) ? realSize : position;
+    td[i].sizei = (i == threadnum - 1) ? sizei : position;
     pthread_create(&tid[i],NULL,simpleMatrixProizvp, &td[i]);
   }
   for(i = 0; i < threadnum; i++) {
