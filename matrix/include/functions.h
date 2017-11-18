@@ -27,8 +27,6 @@ typedef struct pthreaddata {
   int sizej;
   int sizek;
   int starti;
-  int startj;
-  int startk;
 } pdat;
 
 double wtime();
