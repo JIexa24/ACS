@@ -62,7 +62,7 @@ int main(int argc, char** argv)
     }
   }
 
-  int step = (int)((double)realSize/(double)threadnum);int position = 0;
+  int step = (int)((double)sizei/(double)threadnum);int position = 0;
   pthread_t *tid = malloc(threadnum * sizeof(pthread_t));
   pdat *td = malloc(threadnum * sizeof(pdat));
   
