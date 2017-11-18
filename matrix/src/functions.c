@@ -69,8 +69,8 @@ void* simpleMatrixProizvAsmp(void * args){
         asm volatile (
                       "mulq %%edx\n\t"
                       "addq %%eax, %0\n\t"
-                      : "=m" (rezult[i][j])
-                      : "a" (first[i][k]), "d"(second[k][j])
+                      : "=m" (p->C[i][j])
+                      : "a" (p->A[i][k]), "d"(p->B[k][j])
                       : "%eax", "%edx", "memory"
                       );
       }
