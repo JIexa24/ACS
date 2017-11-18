@@ -213,6 +213,8 @@ double t , t1, t2, t3,t4;
         t4 = wtime() - t4;st4 +=t4;
 	}
         st4 = st4 / 10000;
-	printf("\n%d | time = %.16lf\n%d | time = %.16lf\n%d | time = %.16lf\n", res, st3, resasm,st4);0
+	eps = res - resasm;
+        eps = eps < 0 ? -eps : eps;
+	printf("\n.16%d | time = %.16lf\n%.16d | time = %.16lf\n", res, st3, resasm,st4,eps);
 	return 0;
 }
