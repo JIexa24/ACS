@@ -29,7 +29,7 @@ int main(int argc, char** argv)
   int sizei = size, sizek, sizej;
   double time;
   threadnum = argc > 2 ? atoi(argv[2]) : 1;
-  sizek = atoi(argv[3]);
+  sizej = atoi(argv[3]);
   sizek = atoi(argv[4]);
   matrixOne = (int32_t**)malloc(sizeof(int32_t*) * sizei);
   for (i = 0; i < realSize; i++) {
