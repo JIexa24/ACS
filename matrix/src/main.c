@@ -66,8 +66,8 @@ int main(int argc, char** argv)
     }
   }
     pthread_t tid[8];
-pdat td = {matrixOne,matrixTwo,matrixRezult, 4,8,4,2,0,0};
-pdat td2 = {matrixOne,matrixTwo,matrixRezult, 2,8,4,0,0,0};
+pdat td = {matrixOne,matrixTwo,matrixRezult, 4,8,4,2};
+pdat td2 = {matrixOne,matrixTwo,matrixRezult, 2,8,4,0};
     time = wtime();
  // simpleMatrixProizvAsm(matrixOne, matrixTwo, matrixRezult, size);
   pthread_create(&tid[0],NULL,simpleMatrixProizvAsmp, &td);
