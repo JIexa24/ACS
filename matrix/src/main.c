@@ -22,7 +22,7 @@ int main(int argc, char** argv)
   int32_t* two           = NULL;
   int32_t* rezult        = NULL;
   int size               = atoi(argv[1]);
-  int realSize           = 2;
+  int realSize           = size;
   int32_t min            = -5;
   int32_t max            = 5;
   int needlevel = 0;
@@ -66,8 +66,8 @@ int main(int argc, char** argv)
     }
   }
     pthread_t tid[8];
-pdat td = {matrixOne,matrixTwo,matrixRezult, 4,4,4,2};
-pdat td2 = {matrixOne,matrixTwo,matrixRezult, 2,4,4,0};
+pdat td = {matrixOne,matrixTwo,matrixRezult, realSize,realSize,realSize,realSize/2};
+pdat td2 = {matrixOne,matrixTwo,matrixRezult, realSize/2,4,4,0};
     time = wtime();
  // simpleMatrixProizvAsm(matrixOne, matrixTwo, matrixRezult, size);
   pthread_create(&tid[0],NULL,simpleMatrixProizvp, &td);
