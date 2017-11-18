@@ -59,7 +59,7 @@ void simpleMatrixProizvAsm(int32_t** first, int32_t** second,
 void* simpleMatrixProizvp(void * args){
 /*int32_t** first, int32_t** second,
                            int32_t** rezult, int size*/
-
+printf("!");
  pdat * p = (pdat *)(args);
   int i,j,k;
   int sizei = p->sizei,sizej = p->sizej,sizek = p->sizek;
