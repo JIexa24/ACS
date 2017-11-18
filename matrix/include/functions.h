@@ -38,7 +38,7 @@ void simpleMatrixProizv(int32_t** first, int32_t** second,
                         int32_t** reszult, int size);
 void simpleMatrixProizvAsm(int32_t** first, int32_t** second,
                            int32_t** reszult, int size);
-void simpleMatrixProizvAsmp(void* ptr);
+void *simpleMatrixProizvAsmp(void* ptr);
 
 void simpleMatrixProizvCache(int32_t** first, int32_t** second,
                              int32_t** rezult, int size);
