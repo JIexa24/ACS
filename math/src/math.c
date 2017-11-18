@@ -31,12 +31,12 @@
 	        "vmov d1, %1\n\t"\
 	        "vmov d2, %2\n\t"\
 	        "vmov d4, #0\n\t"\
-	        "vcmp d2, d4\n\t"\
+	        "vcmp.f64 d2, d4\n\t"\
 		"vmrs APSR_nzcv, FPSCR\n\t"\
                 "blo lowpow%=\n\t"\
                 "beq endpow%=\n"\
               "begpow%=:\n\t"\
-                "vcmp d2, d4\n\t"\
+                "vcmp.f64 d2, d4\n\t"\
 		"vmrs APSR_nzcv, FPSCR\n\t"\
                 "beq endpow%=\n\t"\
                 "fmuld d0, d0, d1\n\t"\
@@ -56,12 +56,12 @@
 	        "vmov s1, %1\n\t"\
 	        "vmov s2, %2\n\t"\
 	        "vmov s4, #0\n\t"\
-	        "vcmp s2, s4\n\t"\
+	        "vcmp.f32 s2, s4\n\t"\
 		"vmrs APSR_nzcv, FPSCR\n\t"\
                 "blo lowpow%=\n\t"\
                 "beq endpow%=\n"\
               "begpow%=:\n\t"\
-                "vcmp s2, s4\n\t"\
+                "vcmp.f32 s2, s4\n\t"\
 		"vmrs APSR_nzcv, FPSCR\n\t"\
                 "beq endpow%=\n\t"\
                 "fmuls s0, s0, s1\n\t"\
@@ -121,12 +121,12 @@ volatile double asmpowlf(double num, int radix)
 	        "vmov d1, %1\n\t"
 	        "vmov d2, %2\n\t"
 	        "vmov d4, #0\n\t"
-	        "vcmp d2, d4\n\t"
+	        "vcmp.f64 d2, d4\n\t"
 		"vmrs APSR_nzcv, FPSCR\n\t"
                 "blo lowpow%=\n\t"
                 "beq endpow%=\n"
               "begpow%=:\n\t"
-                "vcmp d2, d4\n\t"
+                "vcmp.f64 d2, d4\n\t"
 		"vmrs APSR_nzcv, FPSCR\n\t"
                 "beq endpow%=\n\t"
                 "fmuld d0, d0, d1\n\t"
@@ -152,12 +152,12 @@ volatile float asmpowf(float num, int radix)
 	        "vmov s1, %1\n\t"
 	        "vmov s2, %2\n\t"
 	        "vmov s4, #0\n\t"
-	        "vcmp s2, s4\n\t"
+	        "vcmp.f32 s2, s4\n\t"
 		"vmrs APSR_nzcv, FPSCR\n\t"
                 "blo lowpow%=\n\t"
                 "beq endpow%=\n"
               "begpow%=:\n\t"
-                "vcmp s2, s4\n\t"
+                "vcmp.f32 s2, s4\n\t"
 		"vmrs APSR_nzcv, FPSCR\n\t"
                 "beq endpow%=\n\t"
                 "fmuls s0, s0, s1\n\t"
