@@ -26,46 +26,41 @@ int main(int argc, char** argv)
   int32_t min            = -5;
   int32_t max            = 5;
   int needlevel = 0;
+  int sizei = size, sizek, sizej;
   threadnum = argc > 2 ? atoi(argv[2]) : 1;
-
-  matrixOne = (int32_t**)malloc(sizeof(int32_t*) * realSize);
+  sizek = atoi(argv[3]);
+  sizek = atoi(argv[4]);
+  matrixOne = (int32_t**)malloc(sizeof(int32_t*) * sizei);
   for (i = 0; i < realSize; i++) {
-    matrixOne[i] = (int32_t*)malloc(sizeof(int32_t) * realSize);
+    matrixOne[i] = (int32_t*)malloc(sizeof(int32_t) * sizek);
   }
 
-  matrixTwo = (int32_t**)malloc(sizeof(int32_t*) * realSize);
+  matrixTwo = (int32_t**)malloc(sizeof(int32_t*) * sizek);
   for (i = 0; i < realSize; i++) {
-    matrixTwo[i] = (int32_t*)malloc(sizeof(int32_t) * realSize);
+    matrixTwo[i] = (int32_t*)malloc(sizeof(int32_t) * sizej);
   }
 
-  matrixRezult = (int32_t**)malloc(sizeof(int32_t*) * realSize);
+  matrixRezult = (int32_t**)malloc(sizeof(int32_t*) * sizei);
   for (i = 0; i < realSize; i++) {
-    matrixRezult[i] = (int32_t*)malloc(sizeof(int32_t) * realSize);
+    matrixRezult[i] = (int32_t*)malloc(sizeof(int32_t) * sizej);
   }
 
-  for (i = 0; i < realSize; i++) {
-    for (j = 0; j < realSize; j++) {
-      if ((i >= size) | (j >= size)) {
-        matrixOne[i][j] = 0;
-        matrixTwo[i][j] = 0;
-      } else {
+  for (i = 0; i < sizei; i++) {
+    for (j = 0; j < sizek; j++) {
         matrixOne[i][j] = getrand(min,max);
+    }
+  }
+  for (i = 0; i < sizek; i++) {
+    for (j = 0; j < sizej; j++) {
         matrixTwo[i][j] = getrand(min,max);
-      }
-      matrixRezult[i][j] = 0;
+    }
+  }
+  for (i = 0; i < sizei; i++) {
+    for (j = 0; j < sizej; j++) {
+        matrixRezult[i][j] = 0;
     }
   }
 
-  double time = wtime();
- // simpleMatrixProizv(matrixOne, matrixTwo, matrixRezult, size);
-  time = wtime() - time;
-  printf("simpleMatrixProizv\t%.6lf\n" , time);
-
-  for (i = 0; i < realSize; i++) {
-    for (j = 0; j < realSize; j++) {
-      matrixRezult[i][j] = 0;
-    }
-  }
   int step = (int)((double)realSize/(double)threadnum);int position;
   pthread_t *tid = malloc(threadnum * sizeof(pthread_t));
   pdat *td = malloc(threadnum * sizeof(pdat));
@@ -96,12 +91,6 @@ int main(int argc, char** argv)
     }
   }
 
-  time = wtime();
- // simpleMatrixProizvCache(matrixOne, matrixTwo, matrixRezult, size);
-  time = wtime() - time;
-
-  printf("simpleMatrixProizvCache\t%.6lf\n" , time);
-
   for(i = 0; i < realSize; i++){
     free(matrixOne[i]);
     free(matrixTwo[i]);
@@ -113,6 +102,7 @@ int main(int argc, char** argv)
     free(matrixRezult[i]);
   }
   free(matrixRezult);
+  
   if (size > 1)
   for (i = 0; ; i++) {
     if ((size > myPow(2,i)) & (size <= myPow(2, i + 1))) {
@@ -124,7 +114,9 @@ int main(int argc, char** argv)
   one = (int32_t*)calloc(realSize * realSize, sizeof(int32_t));
   two = (int32_t*)calloc(realSize * realSize, sizeof(int32_t));
   rezult = (int32_t*)calloc(realSize * realSize, sizeof(int32_t));
+  
   printf("%d %d\n",size, realSize);
+  
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
       if (i < size && j < size) {
@@ -174,7 +166,7 @@ int main(int argc, char** argv)
      needlevel = 0;break; 
     }
   }
-  int flg = argc > 3 ? atoi(argv[3]) : 0;
+  int flg = 0;
   print = flg;  
   printf("needlvl %d\n",needlevel);
   dat datat = {rezult,one, two,realSize,realSize, 1, needlevel, 0};
