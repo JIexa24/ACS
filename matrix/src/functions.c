@@ -64,9 +64,9 @@ void* simpleMatrixProizvAsmp(void * args){
   int i,j,k;
   int sizei = p->sizei,sizej = p->sizej,sizek = p->sizek;
   
-  for (i = 0; i < sizei; i++) {
-    for (k = 0; k < sizej; k++) {
-      for (j = 0; j < sizek; j++) {
+  for (i = p->starti; i < sizei; i++) {
+    for (k =  0; k < sizek; k++) {
+      for (j = 0; j < sizej; j++) {
         asm volatile (
                       ".intel_syntax noprefix\n\t"
                       "mul edx\n\t"
