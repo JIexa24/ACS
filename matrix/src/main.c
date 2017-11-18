@@ -11,7 +11,7 @@ int getrand(int32_t min, int32_t max)
 /*---------------------------------------------------------------------------*/
 int main(int argc, char** argv)
 {
-  assert(!(argc < 2));
+  assert(!(argc < 5));
 
   int i                  = 0;
   int j                  = 0;
