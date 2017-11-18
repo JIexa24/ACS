@@ -65,9 +65,14 @@ int main(int argc, char** argv)
       matrixRezult[i][j] = 0;
     }
   }
-pdat td;
-  time = wtime();
+    pthread_t tid[8];
+pdat td = {matrixOne,matrixTwo,matrixRezult, 4,8,4,2,0,0};
+pdat td2 = {matrixOne,matrixTwo,matrixRezult, 2,8,4,0,0,0};
+    time = wtime();
  // simpleMatrixProizvAsm(matrixOne, matrixTwo, matrixRezult, size);
+  pthread_create(&tid[0],NULL,simpleMatrixProizvAsmp, &td[0]);
+  simpleMatrixProizvAsmp(&td[1]);
+  pthread_join(&tid[0],NULL);
   simpleMatrixProizvAsmp(&td);
   time = wtime() - time;
   printf("simpleMatrixProizvAsm\t%.6lf\n" , time);
@@ -163,7 +168,7 @@ pdat td;
   dat datat = {rezult,one, two,realSize,realSize, 1, needlevel, 0};
   pthread_spin_init(&complock, PTHREAD_PROCESS_PRIVATE);
   time = wtime();
-   simpleMatrixProizvCacheObliviousp(&datat);
+ //  simpleMatrixProizvCacheObliviousp(&datat);
 //  simpleMatrixProizvCacheOblivious(rezult, one, two, realSize, realSize);
   time = wtime() - time;
   pthread_spin_destroy(&complock);
