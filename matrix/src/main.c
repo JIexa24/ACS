@@ -48,12 +48,12 @@ int main(int argc, char** argv)
 
   for (i = 0; i < sizei; i++) {
     for (j = 0; j < sizek; j++) {
-        matrixOne[i][j] = getrand(min,max);
+        matrixOne[i][j] = j+1;
     }
   }
   for (i = 0; i < sizek; i++) {
     for (j = 0; j < sizej; j++) {
-        matrixTwo[i][j] = getrand(min,max);
+        matrixTwo[i][j] = i+1;
     }
   }
   for (i = 0; i < sizei; i++) {
@@ -84,6 +84,11 @@ int main(int argc, char** argv)
   }
   time = wtime() - time;
   printf("simpleMatrixProizvp\t%.6lf\n" , time);
+  int sum = 0;
+  for (i = 1; i <= size; i++) {
+    sum += myPow(i,2);
+  }
+  printf("%d ==%d\n",matrixRezult[(size - 1][(size-1)], sum);
 
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
@@ -206,7 +211,7 @@ int main(int argc, char** argv)
   }
       printf("\n");
   printf("simpleMatrixProizvCacheOblivious\t%.6lf \n\n" , time - (cntr > 0 ? 2 : 0));// - cntr * 2);
-  int sum = 0;
+   sum = 0;
   for (i = 1; i <= size; i++) {
     sum += myPow(i,2);
   }
