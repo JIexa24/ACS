@@ -31,19 +31,19 @@
 	        "vmov d1, %1\n\t"\
 	        "vmov d2, %2\n\t"\
 	        "vmov d4, #0\n\t"\
-	        "cmp d2, d4\n\t"\
+	        "vcmp d2, d4\n\t"\
                 "blo lowpow%=\n\t"\
                 "beq endpow%=\n"\
               "begpow%=:\n\t"\
-                "cmp d2, d4\n\t"\
+                "vcmp d2, d4\n\t"\
                 "beq endpow%=\n\t"\
                 "fmuld d0, d0, d1\n\t"\
-                "sub d2, d2, #1\n\t"\
+                "vsub d2, d2, #1\n\t"\
                 "b begpow%=\n"\
               "lowpow%=:\n\t"\
-                "mov d0, #0\n"\
+                "vmov d0, #0\n"\
               "endpow%=:\n\t"\
-                "mov %0, d0\n"\
+                "vmov %0, d0\n"\
                 : "=r" (num)\
                 : "r" (num), "r" (radix)\
                 : "memory"\
@@ -54,19 +54,19 @@
 	        "vmov s1, %1\n\t"\
 	        "vmov s2, %2\n\t"\
 	        "vmov s4, #0\n\t"\
-	        "cmp s2, s4\n\t"\
+	        "vcmp s2, s4\n\t"\
                 "blo lowpow%=\n\t"\
                 "beq endpow%=\n"\
               "begpow%=:\n\t"\
-                "cmp s2, s4\n\t"\
+                "vcmp s2, s4\n\t"\
                 "beq endpow%=\n\t"\
                 "fmuls s0, s0, s1\n\t"\
-                "sub s2, s2, #1\n\t"\
+                "vsub s2, s2, #1\n\t"\
                 "b begpow%=\n"\
               "lowpow%=:\n\t"\
-                "mov s0, #0\n"\
+                "vmov s0, #0\n"\
               "endpow%=:\n\t"\
-                "mov %0, s0\n"\
+                "vmov %0, s0\n"\
                 : "=r" (num)\
                 : "r" (num), "r" (radix)\
                 : "memory"\
@@ -117,19 +117,19 @@ volatile double asmpowlf(double num, int radix)
 	        "vmov d1, %1\n\t"
 	        "vmov d2, %2\n\t"
 	        "vmov d4, #0\n\t"
-	        "cmp d2, d4\n\t"
+	        "vcmp d2, d4\n\t"
                 "blo lowpow%=\n\t"
                 "beq endpow%=\n"
               "begpow%=:\n\t"
-                "cmp d2, d4\n\t"
+                "vcmp d2, d4\n\t"
                 "beq endpow%=\n\t"
                 "fmuld d0, d0, d1\n\t"
-                "sub d2, d2, #1\n\t"
+                "vsub d2, d2, #1\n\t"
                 "b begpow%=\n"
               "lowpow%=:\n\t"
-                "mov d0, #0\n"
+                "vmov d0, #0\n"
               "endpow%=:\n\t"
-                "mov %0, d0\n"
+                "vmov %0, d0\n"
                 : "=r" (ret)
                 : "r" (num), "r" (radix)
                 : "memory"
@@ -146,19 +146,19 @@ volatile float asmpowf(float num, int radix)
 	        "vmov s1, %1\n\t"
 	        "vmov s2, %2\n\t"
 	        "vmov s4, #0\n\t"
-	        "cmp s2, s4\n\t"
+	        "vcmp s2, s4\n\t"
                 "blo lowpow%=\n\t"
                 "beq endpow%=\n"
               "begpow%=:\n\t"
-                "cmp s2, s4\n\t"
+                "vcmp s2, s4\n\t"
                 "beq endpow%=\n\t"
                 "fmuls s0, s0, s1\n\t"
-                "sub s2, s2, #1\n\t"
+                "vsub s2, s2, #1\n\t"
                 "b begpow%=\n"
               "lowpow%=:\n\t"
-                "mov s0, #0\n"
+                "vmov s0, #0\n"
               "endpow%=:\n\t"
-                "mov %0, s0\n"
+                "vmov %0, s0\n"
                 : "=r" (ret)
                 : "r" (num), "r" (radix)
                 : "memory"
