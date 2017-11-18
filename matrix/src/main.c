@@ -65,8 +65,6 @@ int main(int argc, char** argv)
   pthread_t *tid = malloc(threadnum * sizeof(pthread_t));
   pdat *td = malloc(threadnum * sizeof(pdat));
   
-  pdat td[2] = {{matrixOne,matrixOne,matrixRezult, realSize,realSize,realSize,realSize/2},
-              {matrixOne,matrixTwo,matrixRezult, realSize/2,4,4,0}};
     time = wtime();
  // simpleMatrixProizvAsm(matrixOne, matrixTwo, matrixRezult, size);
   for(i = 0; i < threadnum; i++) {
