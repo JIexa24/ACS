@@ -26,7 +26,7 @@ int main(int argc, char** argv)
   int32_t min            = -5;
   int32_t max            = 5;
   int needlevel = 0;
-  threadnum = argc > 2 ? atoi(argv[2]) : 0;
+  threadnum = argc > 2 ? atoi(argv[2]) : 1;
 
   matrixOne = (int32_t**)malloc(sizeof(int32_t*) * realSize);
   for (i = 0; i < realSize; i++) {
