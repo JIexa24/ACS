@@ -59,7 +59,7 @@ void* simpleMatrixProizvAsmp(void * args){
 /*int32_t** first, int32_t** second,
                            int32_t** rezult, int size*/
 
- tdat * p = (tdat *)(args);
+ pdat * p = (tdat *)(args);
   int i,j,k;
   int sizei = p->sizei,sizej = p->sizej,sizek = p->sizek;
   
