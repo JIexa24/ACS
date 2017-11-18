@@ -65,7 +65,7 @@ int main(int argc, char** argv)
       matrixRezult[i][j] = 0;
     }
   }
-tdat td;
+pdat td;
   time = wtime();
  // simpleMatrixProizvAsm(matrixOne, matrixTwo, matrixRezult, size);
   simpleMatrixProizvAsmp(&td);
