@@ -44,11 +44,12 @@ void simpleMatrixProizvAsm(int32_t** first, int32_t** second,
     for (k = 0; k < size; k++) {
       for (j = 0; j < size; j++) {
         asm volatile (
-                      "mulq %%edx\n\t"
-                      "addq %%eax, %0\n\t"
+                      ".intel_syntax noprefix\n\t"
+                      "mul edx\n\t"
+                      "add %0, eax\n\t"
                       : "=m" (rezult[i][j])
                       : "a" (first[i][k]), "d"(second[k][j])
-                      : "%eax", "%edx", "memory"
+                      :"memory"
                       );
       }
     }
@@ -67,11 +68,12 @@ void* simpleMatrixProizvAsmp(void * args){
     for (k = 0; k < sizej; k++) {
       for (j = 0; j < sizek; j++) {
         asm volatile (
-                      "mulq %%edx\n\t"
-                      "addq %%eax, %0\n\t"
+                      ".intel_syntax noprefix\n\t"
+                      "mul edx\n\t"
+                      "add %0, eax\n\t"
                       : "=m" (p->C[i][j])
                       : "a" (p->A[i][k]), "d"(p->B[k][j])
-                      : "%eax", "%edx", "memory"
+                      :  "memory"
                       );
       }
     }
