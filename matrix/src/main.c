@@ -29,8 +29,10 @@ int main(int argc, char** argv)
   int sizei = size, sizek, sizej;
   double time;
   threadnum = argc > 2 ? atoi(argv[2]) : 1;
+  
   sizej = atoi(argv[4]);
   sizek = atoi(argv[3]);
+  
   matrixOne = (int32_t**)malloc(sizeof(int32_t*) * sizei);
   for (i = 0; i < realSize; i++) {
     matrixOne[i] = (int32_t*)malloc(sizeof(int32_t) * sizek);
@@ -66,8 +68,7 @@ int main(int argc, char** argv)
   pthread_t *tid = malloc(threadnum * sizeof(pthread_t));
   pdat *td = malloc(threadnum * sizeof(pdat));
   
-    time = wtime();
- // simpleMatrixProizvAsm(matrixOne, matrixTwo, matrixRezult, size);
+  time = wtime();
   for(i = 0; i < threadnum; i++) {
     td[i].A = matrixOne;
     td[i].B = matrixTwo;
@@ -88,7 +89,7 @@ int main(int argc, char** argv)
   for (i = 1; i <= size; i++) {
     sum += myPow(i,2);
   }
-  printf("%d ==%d\n",matrixRezult[(size - 1)][(size-1)], sum);
+  printf("%d == %d\n",matrixRezult[(size - 1)][(size-1)], sum);
 
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
@@ -174,11 +175,11 @@ int main(int argc, char** argv)
   int flg = 0;
   print = flg;  
   printf("needlvl %d\n",needlevel);
+  
   dat datat = {rezult,one, two,realSize,realSize, 1, needlevel, 0};
   pthread_spin_init(&complock, PTHREAD_PROCESS_PRIVATE);
   time = wtime();
  //  simpleMatrixProizvCacheObliviousp(&datat);
-//  simpleMatrixProizvCacheOblivious(rezult, one, two, realSize, realSize);
   time = wtime() - time;
   pthread_spin_destroy(&complock);
 
@@ -209,13 +210,13 @@ int main(int argc, char** argv)
       printf("\n");
   }
   }
-      printf("\n");
+  printf("\n");
   printf("simpleMatrixProizvCacheOblivious\t%.6lf \n\n" , time - (cntr > 0 ? 2 : 0));// - cntr * 2);
    sum = 0;
   for (i = 1; i <= size; i++) {
     sum += myPow(i,2);
   }
-  printf("%d ==%d\n",rezult[(size - 1)*(size-1)], sum);
+  //printf("%d == %d\n",rezult[(size - 1)*(size-1)], sum);
   
     free(two);
     free(one);
