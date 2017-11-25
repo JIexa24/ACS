@@ -3,6 +3,8 @@ int threadnum = 7;
 int threadn;
 int print;
 int cntr = 0;
+//int size;
+//int process;
 extern pthread_spinlock_t complock;
 int getrand(int32_t min, int32_t max)
 {
@@ -78,6 +80,7 @@ int main(int argc, char** argv)
     td[i].starti = position;
     position+=step;
     td[i].sizei = (i == threadnum - 1) ? sizei : position;
+    td[i].pid = i;
     pthread_create(&tid[i],NULL,simpleMatrixProizvp, &td[i]);
   }
   for(i = 0; i < threadnum; i++) {

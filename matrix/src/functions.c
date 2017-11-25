@@ -5,7 +5,6 @@
 extern int threadnum;
 extern int threadn;
 extern int cntr;
-
 extern int print;
 int mutlock = 0;
 
@@ -59,18 +58,28 @@ void simpleMatrixProizvAsm(int32_t** first, int32_t** second,
 void* simpleMatrixProizvp(void * args){
 /*int32_t** first, int32_t** second,
                            int32_t** rezult, int size*/
-printf("!");
- pdat * p = (pdat *)(args);
+//printf("!");
+  pdat * p = (pdat *)(args);
   int i,j,k;
   int sizei = p->sizei,sizej = p->sizej,sizek = p->sizek;
+  int sizen = sizei;
+  int sizem = sizej;
+  double size = sizen * sizem;
+  double process = 0;
   for (i = p->starti; i < sizei; i++) {
+    if (p->pid == 0) {
+      printf("%lf%%\n",process/size * 100);
+    }
     for (k =  0; k < sizek; k++) {
       for (j = 0; j < sizej; j++) {
         p->C[i][j] += p->A[i][k] * p->B[k][j];
       }
+//      process+=sizej;
     }
+    process+=sizej;
   }
-return NULL;
+  if (p->pid == 0) printf("%lf%%\n", 100.0);
+  return NULL;
 }
 /*---------------------------------------------------------------------------*/
 void simpleMatrixProizv(int32_t** first, int32_t** second,
