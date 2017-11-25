@@ -92,8 +92,8 @@ int main(int argc, char** argv)
   for (i = 1; i <= size; i++) {
     sum += myPow(i,2);
   }
-  printf("%d == %d\n",matrixRezult[(size - 1)][(size-1)], sum);
-
+//  printf("%d == %d\n",matrixRezult[(size - 1)][(size-1)], sum);
+//
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
       matrixRezult[i][j] = 0;
@@ -124,7 +124,7 @@ int main(int argc, char** argv)
   two = (int32_t*)calloc(realSize * realSize, sizeof(int32_t));
   rezult = (int32_t*)calloc(realSize * realSize, sizeof(int32_t));
   
-  printf("%d %d\n",size, realSize);
+//  printf("%d %d\n",size, realSize);
   
   for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
@@ -155,16 +155,16 @@ int main(int argc, char** argv)
 
 /*  for (i = 0; i < realSize; i++) {
     for (j = 0; j < realSize; j++) {
-      printf("%d(%d %d|%d %d)\t", one[i * size + j], i , j, size, realSize);
-    }
+     printf("%d(%d %d|%d %d)\t", one[i * size + j], i , j, size, realSize);
+   }
       printf("\n");
   }*/
       printf("\n");
   threadnum = 0;
   threadn = 0;
 
-  printf("threadn %d\n",threadn);
-  printf("threadnum %d\n",threadnum);
+//  printf("threadn %d\n",threadn);
+//  printf("threadnum %d\n",threadnum);
   if (threadnum <= 8) needlevel = 1;
   for (i = 0; ; i++){
     if (threadnum <= (myPow(8,i + 1)) && threadnum > (myPow(8,i))) {
@@ -177,7 +177,7 @@ int main(int argc, char** argv)
   }
   int flg = 0;
   print = flg;  
-  printf("needlvl %d\n",needlevel);
+//  printf("needlvl %d\n",needlevel);
   
   dat datat = {rezult,one, two,realSize,realSize, 1, needlevel, 0};
   pthread_spin_init(&complock, PTHREAD_PROCESS_PRIVATE);
@@ -213,8 +213,8 @@ int main(int argc, char** argv)
       printf("\n");
   }
   }
-  printf("\n");
-  printf("simpleMatrixProizvCacheOblivious\t%.6lf \n\n" , time - (cntr > 0 ? 2 : 0));// - cntr * 2);
+//  printf("\n");
+//  printf("simpleMatrixProizvCacheOblivious\t%.6lf \n\n" , time - (cntr > 0 ? 2 : 0));// - cntr * 2);
    sum = 0;
   for (i = 1; i <= size; i++) {
     sum += myPow(i,2);
