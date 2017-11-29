@@ -27,10 +27,10 @@
 
                /* "arsm | fmuls\fmuld"*/
 #define asmPowlf(num,radix) asm volatile (\
-	        "vmov.f64 d0, #1\n\t"\
-	        "vmov.f64 d1, %1\n\t"\
-	        "vmov.f64 d2, %2\n\t"\
-	        "vmov.f64 d4, #0\n\t"\
+	        "vmov d0, #1\n\t"\
+	        "vmov d1, %1\n\t"\
+	        "vmov d2, %2\n\t"\
+	        "vmov d4, #0\n\t"\
 	        "vcmp.f64 d2, d4\n\t"\
 		"vmrs APSR_nzcv, FPSCR\n\t"\
                 "blo lowpow%=\n\t"\
@@ -43,19 +43,19 @@
                 "vsub d2, d2, #1\n\t"\
                 "b begpow%=\n"\
               "lowpow%=:\n\t"\
-                "vmov.f64 d0, #0\n"\
+                "vmov d0, #0\n"\
               "endpow%=:\n\t"\
-                "vmov.f64 %0, d0\n"\
+                "vmov %0, d0\n"\
                 : "=r" (num)\
                 : "r" (num), "r" (radix)\
                 : "memory"\
                );
                /*"arsm | fmuls\fmuld"*/
 #define asmPowf(num,radix) asm volatile (\
-	        "vmov.f32 s0, #1\n\t"\
-	        "vmov.f32 s1, %1\n\t"\
-	        "vmov.f32 s2, %2\n\t"\
-	        "vmov.f32 s4, #0\n\t"\
+	        "vmov s0, #1\n\t"\
+	        "vmov s1, %1\n\t"\
+	        "vmov s2, %2\n\t"\
+	        "vmov s4, #0\n\t"\
 	        "vcmp.f32 s2, s4\n\t"\
 		"vmrs APSR_nzcv, FPSCR\n\t"\
                 "blo lowpow%=\n\t"\
@@ -68,9 +68,9 @@
                 "vsub s2, s2, #1\n\t"\
                 "b begpow%=\n"\
               "lowpow%=:\n\t"\
-                "vmov.f32 s0, #0\n"\
+                "vmov s0, #0\n"\
               "endpow%=:\n\t"\
-                "vmov.f32 %0, s0\n"\
+                "vmov %0, s0\n"\
                 : "=r" (num)\
                 : "r" (num), "r" (radix)\
                 : "memory"\
@@ -117,10 +117,10 @@ volatile double asmpowlf(double num, int radix)
   int ret = -1;
   asm volatile (
                // "arsm | fmuls\fmuld"
-	        "vmov.f64 d0, #1\n\t"
-	        "vmov.f64 d1, %1\n\t"
-	        "vmov.f64 d2, %2\n\t"
-	        "vmov.f64 d4, #0\n\t"
+	        "vmov d0, #1\n\t"
+	        "vmov d1, %1\n\t"
+	        "vmov d2, %2\n\t"
+	        "vmov d4, #0\n\t"
 	        "vcmp.f64 d2, d4\n\t"
 		"vmrs APSR_nzcv, FPSCR\n\t"
                 "blo lowpow%=\n\t"
@@ -133,9 +133,9 @@ volatile double asmpowlf(double num, int radix)
                 "vsub d2, d2, #1\n\t"
                 "b begpow%=\n"
               "lowpow%=:\n\t"
-                "vmov.f64 d0, #0\n"
+                "vmov d0, #0\n"
               "endpow%=:\n\t"
-                "vmov.f64 %0, d0\n"
+                "vmov %0, d0\n"
                 : "=r" (ret)
                 : "r" (num), "r" (radix)
                 : "memory"
@@ -148,10 +148,10 @@ volatile float asmpowf(float num, int radix)
   int ret = -1;
   asm volatile (
                // "arsm | fmuls\fmuld"
-	        "vmov.f32 s0, #1\n\t"
-	        "vmov.f32 s1, %1\n\t"
-	        "vmov.f32 s2, %2\n\t"
-	        "vmov.f32 s4, #0\n\t"
+	        "vmov s0, #1\n\t"
+	        "vmov s1, %1\n\t"
+	        "vmov s2, %2\n\t"
+	        "vmov s4, #0\n\t"
 	        "vcmp.f32 s2, s4\n\t"
 		"vmrs APSR_nzcv, FPSCR\n\t"
                 "blo lowpow%=\n\t"
@@ -164,9 +164,9 @@ volatile float asmpowf(float num, int radix)
                 "vsub s2, s2, #1\n\t"
                 "b begpow%=\n"
               "lowpow%=:\n\t"
-                "vmov.f32 s0, #0\n"
+                "vmov s0, #0\n"
               "endpow%=:\n\t"
-                "vmov.f32 %0, s0\n"
+                "vmov %0, s0\n"
                 : "=r" (ret)
                 : "r" (num), "r" (radix)
                 : "memory"
