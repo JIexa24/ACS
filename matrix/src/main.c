@@ -30,23 +30,23 @@ int main(int argc, char** argv)
   int needlevel = 0;
   int sizei = size, sizek, sizej;
   double time;
-  threadnum = argc > 2 ? atoi(argv[2]) : 1;
+  threadnum = atoi(argv[4]);
   
-  sizej = atoi(argv[4]);
-  sizek = atoi(argv[3]);
+  sizej = atoi(argv[3]);
+  sizek = atoi(argv[2]);
   
   matrixOne = (int32_t**)malloc(sizeof(int32_t*) * sizei);
-  for (i = 0; i < realSize; i++) {
+  for (i = 0; i < sizei; i++) {
     matrixOne[i] = (int32_t*)malloc(sizeof(int32_t) * sizek);
   }
 
   matrixTwo = (int32_t**)malloc(sizeof(int32_t*) * sizek);
-  for (i = 0; i < realSize; i++) {
+  for (i = 0; i < sizek; i++) {
     matrixTwo[i] = (int32_t*)malloc(sizeof(int32_t) * sizej);
   }
 
   matrixRezult = (int32_t**)malloc(sizeof(int32_t*) * sizei);
-  for (i = 0; i < realSize; i++) {
+  for (i = 0; i < sizei; i++) {
     matrixRezult[i] = (int32_t*)malloc(sizeof(int32_t) * sizej);
   }
 
@@ -66,6 +66,20 @@ int main(int argc, char** argv)
     }
   }
 
+  for (i = 0; i < sizei; i++) {
+    for (j = 0; j < sizek; j++) {
+        printf("%d ",matrixOne[i][j]);
+    }
+    printf("\n");
+  }
+    printf("\n");
+  for (i = 0; i < sizek; i++) {
+    for (j = 0; j < sizej; j++) {
+        printf("%d ",matrixTwo[i][j]);
+    }
+    printf("\n");
+  }
+    printf("\n");
   int step = (int)((double)sizei/(double)threadnum);int position = 0;
   pthread_t *tid = malloc(threadnum * sizeof(pthread_t));
   pdat *td = malloc(threadnum * sizeof(pdat));
@@ -75,8 +89,8 @@ int main(int argc, char** argv)
     td[i].A = matrixOne;
     td[i].B = matrixTwo;
     td[i].C = matrixRezult;
-    td[i].sizej = realSize;
-    td[i].sizek = realSize;
+    td[i].sizej = sizej;
+    td[i].sizek = sizek;
     td[i].starti = position;
     position+=step;
     td[i].sizei = (i == threadnum - 1) ? sizei : position;
@@ -94,23 +108,25 @@ int main(int argc, char** argv)
   }
 //  printf("%d == %d\n",matrixRezult[(size - 1)][(size-1)], sum);
 //
-  for (i = 0; i < realSize; i++) {
-    for (j = 0; j < realSize; j++) {
+  for (i = 0; i < sizei; i++) {
+    for (j = 0; j < sizej; j++) {
       matrixRezult[i][j] = 0;
     }
   }
 
-  for(i = 0; i < realSize; i++){
-    free(matrixOne[i]);
+  for (i = 0; i < sizei; i++) {
+  free(matrixOne[i]);
+  }
+  for (i = 0; i < sizei; i++) {
+  free(matrixRezult[i]);
+  }
+  for (i = 0; i < sizek; i++) {
     free(matrixTwo[i]);
   }
   free(matrixOne);
   free(matrixTwo);
-
-  for (i = 0; i < realSize; i++) {
-    free(matrixRezult[i]);
-  }
   free(matrixRezult);
+
   
   if (size > 1)
   for (i = 0; ; i++) {
