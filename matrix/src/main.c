@@ -66,20 +66,7 @@ int main(int argc, char** argv)
     }
   }
 
-  for (i = 0; i < sizei; i++) {
-    for (j = 0; j < sizek; j++) {
-        printf("%d ",matrixOne[i][j]);
-    }
-    printf("\n");
-  }
-    printf("\n");
-  for (i = 0; i < sizek; i++) {
-    for (j = 0; j < sizej; j++) {
-        printf("%d ",matrixTwo[i][j]);
-    }
-    printf("\n");
-  }
-    printf("\n");
+
   int step = (int)((double)sizei/(double)threadnum);int position = 0;
   pthread_t *tid = malloc(threadnum * sizeof(pthread_t));
   pdat *td = malloc(threadnum * sizeof(pdat));
