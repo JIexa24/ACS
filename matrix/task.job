@@ -4,6 +4,7 @@
 #PBS -q release
 cd $PBS_O_WORKDIR
 
-./bin/matrix 10000 2
-./bin/matrix 10000 4
-./bin/matrix 10000 8
+./bin/matrix 4000 4000 4000 2
+./bin/matrix 4000 4000 4000 4
+./bin/matrix 4000 4000 4000 6
+./bin/matrix 4000 4000 4000 8
