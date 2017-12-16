@@ -52,11 +52,12 @@
             );
                /*"arsm | fmuls\fmuld"*/
 #define asmPowf(num,radix) asm volatile (\
-	        "vmov r0, #1\n\t"\
-					"vmov s0, r0\n\t"\
+	        "mov r1, #1\n\t"\
+				  "mov r0, #0\n\t"\
+					"vmov s0, r1\n\t"\
 	        "vmov s1, %1\n\t"\
             "vmov s2, %2\n\t"\
-            "vmov s4, #0\n\t"\
+            "vmov s4, r0\n\t"\
             "vcmp.f32 s2, s4\n\t"\
             "vmrs APSR_nzcv, FPSCR\n\t"\
             "blo lowpow%=\n\t"\
@@ -66,12 +67,13 @@
             "vmrs APSR_nzcv, FPSCR\n\t"\
             "beq endpow%=\n\t"\
             "fmuls s0, s0, s1\n\t"\
-            "vsub s2, s2, #1\n\t"\
+            "vsub s2, s2, r1\n\t"\
             "b begpow%=\n"\
           "lowpow%=:\n\t"\
-            "vmov s0, #0\n"\
+            "vmov s0, r0\n"\
           "endpow%=:\n\t"\
-            "vmov %0, s0\n"\
+            "vmov r4, s0\n"\
+	            "mov %0, r4\n"\
             : "=r" (num)\
             : "r" (num), "r" (radix)\
             : "memory"\
