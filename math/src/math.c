@@ -53,6 +53,7 @@
                /*"arsm | fmuls\fmuld"*/
 #define asmPowf(num,radix) asm volatile (\
 	        "mov r1, #1\n\t"\
+						        "vmov s5, r1\n\t"\
 				  "mov r0, #0\n\t"\
 					"vmov s0, r1\n\t"\
 	        "vmov s1, %1\n\t"\
@@ -67,7 +68,7 @@
             "vmrs APSR_nzcv, FPSCR\n\t"\
             "beq endpow%=\n\t"\
             "fmuls s0, s0, s1\n\t"\
-            "vsub s2, s2, r1\n\t"\
+            "vsub s2, s2, s5\n\t"\
             "b begpow%=\n"\
           "lowpow%=:\n\t"\
             "vmov s0, r0\n"\
