@@ -192,10 +192,11 @@ int a;
         t = wtime() - t;st +=t;
 	}
         st = st / 10000;
-	b = 4;
+
 	for (i = 0; i < 10000; i++) {
         t1 = wtime();
-        asmPowi(b,radix);
+				 b= 4; radix=10;
+         asmPowi(b,radix);
         t1 = wtime() - t1;st1 +=t1;
 	}
         st1 = st1 / 10000;
