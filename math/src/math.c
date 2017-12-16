@@ -52,7 +52,8 @@
             );
                /*"arsm | fmuls\fmuld"*/
 #define asmPowf(num,radix) asm volatile (\
-	        "vmov s0, #1\n\t"\
+	        "vmov r0, #1\n\t"\
+					"vmov s0, r0\n\t"\
 	        "vmov s1, %1\n\t"\
             "vmov s2, %2\n\t"\
             "vmov s4, #0\n\t"\
@@ -220,7 +221,7 @@ int c;
         st3 = st3 / 10000;
 	for (i = 0; i < 10000; i++) {
         t4 = wtime();
-	//    	resasm = asmpowlf(r,radix);
+	    	resasm = asmpowf(r,radix);
         t4 = wtime() - t4;st4 +=t4;
 	}
         st4 = st4 / 10000;
