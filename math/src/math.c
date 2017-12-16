@@ -192,6 +192,7 @@ int a;
         t = wtime() - t;st +=t;
 	}
         st = st / 10000;
+	b = 4;
 	for (i = 0; i < 10000; i++) {
         t1 = wtime();
         asmPowi(b,radix);
@@ -224,6 +225,6 @@ int c;
         st4 = st4 / 10000;
 double	eps = res - resasm;
         eps = eps < 0 ? -eps : eps;
-	printf("\n.16%lf | time = %.16lf\n%.16lf | time = %.16lf \n -- %.16lf\n", res, st3, resasm,st4,eps);
+	printf("\n%.16lf | time = %.16lf\n%.16lf | time = %.16lf \n -- %.16lf\n", res, st3, resasm,st4,eps);
 	return 0;
 }
