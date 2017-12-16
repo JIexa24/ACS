@@ -221,7 +221,8 @@ int c;
         st3 = st3 / 10000;
 	for (i = 0; i < 10000; i++) {
         t4 = wtime();
-	    	resasm = asmpowf(r,radix);
+				r =6.125;
+	    	asmPowf(r,radix);
         t4 = wtime() - t4;st4 +=t4;
 	}
         st4 = st4 / 10000;
