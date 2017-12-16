@@ -111,7 +111,7 @@ volatile int asmpowi(int num, int radix)
                );
     return ret;
 }
-
+/*
 volatile double asmpowlf(double num, int radix)
 {
   int ret = -1;
@@ -173,7 +173,7 @@ volatile float asmpowf(float num, int radix)
                );
     return ret;
 }
-
+*/
 //#define asmPow(X, Y) _Generic((X), default: asmPowlf, double: asmPowlf, int: asmPowi, \
  //                             float: asmPowf)
 //#define asmpow(X, Y) _Generic((X), default: asmpowlf, double: asmpowlf, int: asmpowi, \
@@ -209,7 +209,7 @@ int c;
 	printf("\n%d | time = %.16lf\n%d | time = %.16lf\n%d | time = %.16lf\n", a,st, b,st1, c,st2);
         double r = 6.125;
 	double res = 0, resasm = 0;
-	
+
 	for (i = 0; i < 10000; i++) {
         t3 = wtime();
         res = pow(r,radix);
@@ -218,7 +218,7 @@ int c;
         st3 = st3 / 10000;
 	for (i = 0; i < 10000; i++) {
         t4 = wtime();
-		resasm = asmpowlf(r,radix);
+	//    	resasm = asmpowlf(r,radix);
         t4 = wtime() - t4;st4 +=t4;
 	}
         st4 = st4 / 10000;
