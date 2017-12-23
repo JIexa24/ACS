@@ -42,7 +42,7 @@
             "vmrs APSR_nzcv, FPSCR\n\t"\
             "beq endpow%=\n\t"\
             "fmuls s0, s0, s1\n\t"\
-            "vsub s2, s2, s5\n\t"\
+            "vsub.f32 s2, s2, s5\n\t"\
             "b begpow%=\n"\
           "lowpow%=:\n\t"\
             "vmov s0, r0\n"\
