@@ -22,7 +22,7 @@
             "mov %0, r0\n"\
             : "=r" (num)\
             : "r" (num), "r" (radix)\
-            : "memory" \
+            : "memory" , "r0", "r1", "r2", "r4"\
             );
                /*"arsm | fmuls\fmuld"*/
 #define asmPowf(num,radix) asm volatile (\
@@ -84,7 +84,7 @@ volatile int asmpowi(int num, int radix)
                 "mov %0, r0\n"
                 : "=r" (ret)
                 : "r" (num), "r" (radix)
-                : "memory"
+                : "memory", "r0", "r1", "r2", "r4"
                );
     return ret;
 }
@@ -134,6 +134,7 @@ int c;
 	    	asmPowf(r,radix);
         t4 = wtime() - t4;st4 +=t4;
 	}
+resasm = r;
         st4 = st4 / 10000;
 double	eps = res - resasm;
         eps = eps < 0 ? -eps : eps;
