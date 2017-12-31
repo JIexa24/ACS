@@ -47,10 +47,9 @@
           "lowpow%=:\n\t"\
             "vmov s0, r0\n"\
           "endpow%=:\n\t"\
-            "vmov r4, s0\n"\
-	            "mov %0, r4\n"\
-            : "=r" (num)\
-            : "r" (num), "r" (radix)\
+            "vmov %0, s0\n"\
+            : "=t" (num)\
+            : "t" (num), "t" (radix)\
             : "memory"\
             );
 
@@ -89,42 +88,6 @@ volatile int asmpowi(int num, int radix)
                );
     return ret;
 }
-/*
-volatile float asmpowf(float num, int radix)
-{
-  int ret = -1;
-  asm volatile (
-                // "arsm | fmuls\fmuld"
-	            "vmov s0, #1\n\t"
-	            "vmov s1, %1\n\t"
-	            "vmov s2, %2\n\t"
-	            "vmov s4, #0\n\t"
-	            "vcmp.f32 s2, s4\n\t"
-                "vmrs APSR_nzcv, FPSCR\n\t"
-                "blo lowpow%=\n\t"
-                "beq endpow%=\n"
-              "begpow%=:\n\t"
-                "vcmp.f32 s2, s4\n\t"
-                "vmrs APSR_nzcv, FPSCR\n\t"
-                "beq endpow%=\n\t"
-                "fmuls s0, s0, s1\n\t"
-                "vsub s2, s2, #1\n\t"
-                "b begpow%=\n"
-              "lowpow%=:\n\t"
-                "vmov s0, #0\n"
-              "endpow%=:\n\t"
-                "vmov %0, s0\n"
-                : "=r" (ret)
-                : "r" (num), "r" (radix)
-                : "memory"
-               );
-    return ret;
-}
-*/
-//#define asmPow(X, Y) _Generic((X), default: asmPowlf, double: asmPowlf, int: asmPowi, \
- //                             float: asmPowf)
-//#define asmpow(X, Y) _Generic((X), default: asmpowlf, double: asmpowlf, int: asmpowi, \
- //                             float: asmpowf)
 
 int main(){
 
