@@ -45,7 +45,7 @@
             "vsub.f32 s2, s2, s5\n\t"\
             "b begpow%=\n"\
           "lowpow%=:\n\t"\
-            "vmov s0, r0\n"\
+            "vmov s0, s4\n"\
           "endpow%=:\n\t"\
             "vmov %0, s0\n"\
             : "=t" (num)\
