@@ -4,8 +4,8 @@ all: MATRIX
 MATRIX:
 	make -C matrix
 
-MATH:
-	make -C math
+ASM:
+	make -C asm
 
 clean:
 	rm ./matrix/obj/*.o
