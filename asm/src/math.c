@@ -22,7 +22,7 @@
             "mov %0, r0\n"\
             : "=r" (num)\
             : "r" (num), "r" (radix)\
-            : "memory" \
+            : "memory" , "r0", "r1", "r2", "r4"\
             );
                /*"arsm | fmuls\fmuld"*/
 #define asmPowf(num,radix) asm volatile (\
@@ -45,12 +45,11 @@
             "vsub.f32 s2, s2, s5\n\t"\
             "b begpow%=\n"\
           "lowpow%=:\n\t"\
-            "vmov s0, r0\n"\
+            "vmov s0, s4\n"\
           "endpow%=:\n\t"\
-            "vmov r4, s0\n"\
-	            "mov %0, r4\n"\
-            : "=r" (num)\
-            : "r" (num), "r" (radix)\
+            "vmov %0, s0\n"\
+            : "=t" (num)\
+            : "t" (num), "t" (radix)\
             : "memory"\
             );
 
@@ -85,46 +84,10 @@ volatile int asmpowi(int num, int radix)
                 "mov %0, r0\n"
                 : "=r" (ret)
                 : "r" (num), "r" (radix)
-                : "memory"
+                : "memory", "r0", "r1", "r2", "r4"
                );
     return ret;
 }
-/*
-volatile float asmpowf(float num, int radix)
-{
-  int ret = -1;
-  asm volatile (
-                // "arsm | fmuls\fmuld"
-	            "vmov s0, #1\n\t"
-	            "vmov s1, %1\n\t"
-	            "vmov s2, %2\n\t"
-	            "vmov s4, #0\n\t"
-	            "vcmp.f32 s2, s4\n\t"
-                "vmrs APSR_nzcv, FPSCR\n\t"
-                "blo lowpow%=\n\t"
-                "beq endpow%=\n"
-              "begpow%=:\n\t"
-                "vcmp.f32 s2, s4\n\t"
-                "vmrs APSR_nzcv, FPSCR\n\t"
-                "beq endpow%=\n\t"
-                "fmuls s0, s0, s1\n\t"
-                "vsub s2, s2, #1\n\t"
-                "b begpow%=\n"
-              "lowpow%=:\n\t"
-                "vmov s0, #0\n"
-              "endpow%=:\n\t"
-                "vmov %0, s0\n"
-                : "=r" (ret)
-                : "r" (num), "r" (radix)
-                : "memory"
-               );
-    return ret;
-}
-*/
-//#define asmPow(X, Y) _Generic((X), default: asmPowlf, double: asmPowlf, int: asmPowi, \
- //                             float: asmPowf)
-//#define asmpow(X, Y) _Generic((X), default: asmpowlf, double: asmpowlf, int: asmpowi, \
- //                             float: asmpowf)
 
 int main(){
 
@@ -171,6 +134,7 @@ int c;
 	    	asmPowf(r,radix);
         t4 = wtime() - t4;st4 +=t4;
 	}
+resasm = r;
         st4 = st4 / 10000;
 double	eps = res - resasm;
         eps = eps < 0 ? -eps : eps;
