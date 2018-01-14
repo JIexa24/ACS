@@ -26,8 +26,14 @@
             );
                /*"arsm | fmuls\fmuld"*/
 #define asmPowf(num,radix)\
+  #ifndef ASMIN\
+  #define ASMIN\
   int one = 1;\
   int zero = 0;\
+  #else\
+  one = 1;\
+  zero = 0;\
+  #endif\
   asm volatile (\
             "vmov %0, %4\n"\
             "vcmp.f32 %2, %4\n\t"\
