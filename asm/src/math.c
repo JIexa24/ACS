@@ -25,31 +25,28 @@
             : "memory" , "r0", "r1", "r2", "r4"\
             );
                /*"arsm | fmuls\fmuld"*/
-#define asmPowf(num,radix) asm volatile (\
-            "mov r1, #1\n\t"\
-            "vmov s5, r1\n\t"\
-            "mov r0, #0\n\t"\
-            "vmov s0, r1\n\t"\
-            "vmov s1, %1\n\t"\
-            "vmov s2, %2\n\t"\
-            "vmov s4, r0\n\t"\
-            "vcmp.f32 s2, s4\n\t"\
+#define asmPowf(num,radix)\
+  int one = 1;\
+  int zero = 0;\
+  asm volatile (\
+            "vmov %0, %4\n"\
+            "vcmp.f32 %2, %4\n\t"\
             "vmrs APSR_nzcv, FPSCR\n\t"\
             "blo lowpow%=\n\t"\
             "beq endpow%=\n"\
           "begpow%=:\n\t"\
-            "vcmp.f32 s2, s4\n\t"\
+            "vcmp.f32 %2, %4\n\t"\
             "vmrs APSR_nzcv, FPSCR\n\t"\
             "beq endpow%=\n\t"\
-            "fmuls s0, s0, s1\n\t"\
-            "vsub.f32 s2, s2, s5\n\t"\
+            "fmuls %0, %1, %0\n\t"\
+            "vsub.f32 %2, %2, %3\n\t"\
             "b begpow%=\n"\
           "lowpow%=:\n\t"\
-            "vmov s0, s4\n"\
+            "vmov %0, %4\n"\
           "endpow%=:\n\t"\
-            "vmov %0, s0\n"\
+            "vmov %0, %0\n"\
             : "=t" (num)\
-            : "t" (num), "t" (radix)\
+            : "t" (num), "t" (radix), "t"(one), "t"(zero), "0" (num)\
             : "memory"\
             );
 
@@ -92,7 +89,7 @@ volatile int asmpowi(int num, int radix)
 int main(){
 
 int b = 4,i, radix = 10;
-double t , t1, t2, t3,t4;
+double t , t1, t2, t3[10000],t4[10000];
 	double st, st1, st2,st3,st4;
 int a;
 	for (i = 0; i < 10000; i++) {
@@ -118,26 +115,36 @@ int c;
 	}
         st2 = st2 / 10000;
 
-	printf("\n%d | time = %.16lf\n%d | time = %.16lf\n%d | time = %.16lf\n", a,st, b,st1, c,st2);
+	printf("\nasmf:%d | time = %.16lf\nasmd:%d | time = %.16lf\nlm:%d | time = %.16lf\n", a,st, b,st1, c,st2);
         double r = 6.125;
 	double res = 0, resasm = 0;
 
 	for (i = 0; i < 10000; i++) {
-        t3 = wtime();
+        t3[i] = wtime();
         res = pow(r,radix);
-        t3 = wtime() - t3;st3 +=t3;
+        t3[i] = wtime() - t3[i];st3 +=t3[i];
 	}
         st3 = st3 / 10000;
 	for (i = 0; i < 10000; i++) {
-        t4 = wtime();
+        t4[i] = wtime();
 				r =6.125;
 	    	asmPowf(r,radix);
-        t4 = wtime() - t4;st4 +=t4;
+        t4[i] = wtime() - t4;st4 +=t4;
 	}
 resasm = r;
         st4 = st4 / 10000;
 double	eps = res - resasm;
         eps = eps < 0 ? -eps : eps;
-	printf("\n%.16lf | time = %.16lf\n%.16lf | time = %.16lf \n -- %.16lf\n", res, st3, resasm,st4,eps);
+	printf("\nlm:%.16lf | time = %.16lf\nasmd:%.16lf | time = %.16lf \n -- %.16lf\n", res, st3, resasm,st4,eps);
+  double disp_asm, disp_lib;
+  for (int i = 0; i < 10000; ++i)
+  {
+  disp_asm += pow(t4[i] - st4, 2);
+  disp_lib += pow(t3[i] - st3, 2);
+  }
+  disp_asm /= 10000;
+  disp_lib /= 10000;
+  printf("Masm: %.6f.\nMlib: %.6f.\nDasm: %.6f.\nDlib: %.6f.\nSasm: %.6f.\nSasm: %.6f.\n",
+st4, st3, disp_asm, disp_lib, sqrt(disp_asm), sqrt(disp_lib));
 	return 0;
 }
